@@ -3,13 +3,9 @@ import morgan from "morgan";
 import helmet from "helmet";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import { userRouter } from "./router";
 
 const app = express();
-
-const PORT = 4000;
-
-const handleListening = () =>
-  console.log(`Listening on: httpL//localhost:${PORT}`);
 
 const handleHome = (req, res) => res.send("Welcome to my home!");
 
@@ -29,10 +25,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan("dev")); // logger기능을 가진 "morgan"이라는 middleware사용하여, 요청과 응답사이에 로그를 확인하는 기능 추가
 
-app.listen(PORT, handleListening);
-
 app.get("/", handleHome);
 app.get("/profile", handleProfile);
+app.use("/user", userRouter);
+
+export default app; // import 할때  =>   import userRouter from "./router"
 
 // middleware가 next()없이, res.send()으로 끝나는 함수이면, 연결을 끝게 될 수 있다.
 // const middleware = (req, res, next) => {
