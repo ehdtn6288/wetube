@@ -17,6 +17,8 @@ userRouter.get(routes.userDetail, userDetail);
 정의되면, 그 아래있는 경로에 대해서, /:id의 변하는 텍스트값을 가진 경로로 인식하여, /:id에 대한
 로직만 동작하고, 아래있는 코드는 작동하지 않는다. 
 따라서, ~!!! userDetail과 같이 /:id가 포함된 경로는 제일 아래줄에 입력해주자! 
+
+아니면, videoRouter처럼, /:id/edit과 같이 /:id 이후에 하위 경로를 포함하여 나타내면 된다. 
 */
 
 export default userRouter;

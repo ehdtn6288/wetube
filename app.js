@@ -1,12 +1,13 @@
-import express from "express";
-import morgan from "morgan";
-import helmet from "helmet";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import express from "express";
+import helmet from "helmet";
+import morgan from "morgan";
+import { localsMiddleware } from "./localsMiddleware";
 import userRouter from "./routers/userRouter";
 import globalRouter from "./routers/globalRouter";
 import videoRouter from "./routers/videoRouter";
-import routes from "./routes";
+import routes from "./routes"; // import 는 알파벳 순으로 정렬
 // @babel/node 를 이용하여, ES6의 자바스크립트 코드를, 구버전의 코드형식으로 변환해주기 때문에, 최신형태의 자바스크립트 코드를 사용하여도, 호환성문제를 해결할 수 있다.
 // 즉, babel을 이용하여, nodejs에서 최신 ES6 자바스크립트 코드를 사용할 수 있다.
 // 기존 import방식  :  const express = require("express");
@@ -16,14 +17,15 @@ import routes from "./routes";
 // 3. import { express } from "express";   <export const express = require("express")와 같이 default가 아닐 때>
 
 const app = express();
+app.set("view engine", "pug");
 
-// app.use(betweenHome); middleware 연습
+app.use(helmet());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(helmet());
 app.use(morgan("dev")); // logger기능을 가진 "morgan"이라는 middleware사용하여, 요청과 응답사이에 로그를 확인하는 기능 추가
 
+app.use(localsMiddleware); // 아래 라우터들이 get요청에 대한 응답을 하기전, 요청과 응답사이에 동착 !
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
