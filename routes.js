@@ -9,7 +9,7 @@ const SEARCH = "/search";
 //Users
 
 const USERS = "/users";
-const USER_PROFILE = "/edit-profile";
+const EDIT_PROFILE = "/edit-profile";
 const USER_DETAIL = "/:id";
 const CHANGE_PASSWORD = "/change-password";
 
@@ -32,7 +32,7 @@ const routes = {
 
   users: USERS,
   userDetail: USER_DETAIL,
-  userProfile: USER_PROFILE,
+  editProfile: EDIT_PROFILE,
   changePassword: CHANGE_PASSWORD,
 
   videos: VIDEOS,

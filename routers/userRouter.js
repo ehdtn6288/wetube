@@ -3,14 +3,14 @@ import routes from "../routes";
 import {
   users,
   userDetail,
-  userProfile,
+  editProfile,
   changePassword,
 } from "../controller/userController";
 
 const userRouter = express.Router(); //여기서 export하면,  import 할때  =>   import {userRouter} from "./router"
 
 userRouter.get(routes.home, users);
-userRouter.get(routes.userProfile, userProfile);
+userRouter.get(routes.editProfile, editProfile);
 userRouter.get(routes.changePassword, changePassword);
 userRouter.get(routes.userDetail, userDetail);
 /*!!!! userDetail은 /:id로 변하는 값을 받는다. 따라서, /:id가 포함된 경로에대한 로직이 먼저

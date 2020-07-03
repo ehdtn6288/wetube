@@ -5,7 +5,7 @@ export const logout = (req, res) =>
 export const users = (req, res) => res.render("users", { pageTitle: "Users" });
 export const userDetail = (req, res) =>
   res.render("userDetail", { pageTitle: "UserDetail" });
-export const userProfile = (req, res) =>
-  res.render("userProfile", { pageTitle: "UserProfile" });
+export const editProfile = (req, res) =>
+  res.render("editProfile", { pageTitle: "editProfile" });
 export const changePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "ChangePassword" });
