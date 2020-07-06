@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
-import { localsMiddleware } from "./localsMiddleware";
+import { localsMiddleware } from "./middlewares";
 import userRouter from "./routers/userRouter";
 import globalRouter from "./routers/globalRouter";
 import videoRouter from "./routers/videoRouter";
@@ -20,6 +20,7 @@ const app = express();
 app.set("view engine", "pug");
 
 app.use(helmet());
+app.use("/uploads", express.static("uploads"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
