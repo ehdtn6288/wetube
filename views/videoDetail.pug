@@ -1,5 +1,18 @@
 extends layouts/main
-include mixins/videoBlock
+
 
 block content
-      p videoDetail
+      p VideoDetail!!
+      .video__player
+            video(src=`/${video.fileUrl}`,controls=true. width="300", height ="200")
+      
+      .video__info
+            a(href=routes.editVideo(video.id)) Edit Video
+            h2=`Title : ${video.title}`
+            span=`Description : ${video.description}`   
+            p=`Views : ${video.views}`
+      .video__comments  
+            if video.comments.length == 1 
+                  span.video__comment-number 1 Comment
+            else 
+                  span.video__comment-number #{video.comments.length} Comments
