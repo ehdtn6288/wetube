@@ -22,6 +22,7 @@ app.set("view engine", "pug");
 app.use(helmet());
 app.use(morgan("dev")); // logger기능을 가진 "morgan"이라는 middleware사용하여, 요청과 응답사이에 로그를 확인하는 기능 추가
 app.use("/uploads", express.static("uploads")); //정적 파일이 저장되어있는 경로가 /uploads 안에 있으므로,
+app.use("/static", express.static("static"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
