@@ -36,8 +36,7 @@ export const getLogin = (req, res) => {
 
 export const postLogin = passport.authenticate("local", {
   successRedirect: routes.home,
-  failureRedirect: routes.join,
-  failureFlash: true,
+  failureRedirect: routes.login,
 });
 
 export const logout = (req, res) => {
