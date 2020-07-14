@@ -6,6 +6,8 @@ import globalRouter from "./routers/globalRouter";
 import helmet from "helmet";
 import { localsMiddleware } from "./middlewares";
 import morgan from "morgan";
+import MongoStore from "connect-mongo";
+import mongoose from "mongoose";
 import session from "express-session";
 import passport from "passport";
 import routes from "./routes"; // import 는 알파벳 순으로 정렬
@@ -23,6 +25,8 @@ import dotenv from "dotenv";
 // 3. import { express } from "express";   <export const express = require("express")와 같이 default가 아닐 때>
 
 const app = express();
+const CookieStore = MongoStore(session);
+
 app.set("view engine", "pug");
 
 app.use(helmet());
@@ -38,6 +42,7 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: true,
     saveUninitialized: false,
+    store: new CookieStore({ mongooseConnection: mongoose.connection }),
   })
 );
 app.use(passport.initialize());
