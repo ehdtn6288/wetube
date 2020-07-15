@@ -76,8 +76,14 @@ export const logout = (req, res) => {
 
 export const users = (req, res) => res.render("users", { pageTitle: "Users" });
 
-export const userDetail = (req, res) =>
+export const getMe = (req, res) => {
   res.render("userDetail", { pageTitle: "UserDetail" });
+  console.log(req.user);
+};
+
+export const userDetail = (req, res) => {
+  res.render("userDetail", { pageTitle: "UserDetail" });
+};
 
 export const editProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "editProfile" });

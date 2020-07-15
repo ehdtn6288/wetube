@@ -2,5 +2,7 @@ extends layouts/main
 include mixins/videoBlock
 
 block content
-        h1 유저명 : #{user.name}
-        h2 email : #{user.email}
+        .user-profile  
+                .user-profile__header    
+                        img.avatar(src=loggedUser.avatarUrl)
+                        h3.profile__username=loggedUser.name

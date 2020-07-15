@@ -12,6 +12,7 @@ const USERS = "/users";
 const EDIT_PROFILE = "/edit-profile";
 const USER_DETAIL = "/:id";
 const CHANGE_PASSWORD = "/change-password";
+const ME = "/me";
 
 //Vieos
 
@@ -46,6 +47,7 @@ const routes = {
   changePassword: CHANGE_PASSWORD,
   gitHub: GITHUB,
   gitHubCallBack: GITHUB_CALLBACK,
+  me: ME,
 
   videos: VIDEOS,
   upload: UPLOAD,
