@@ -21,6 +21,10 @@ const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
 
+//Github
+const GITHUB = "/auth/github";
+const GITHUB_CALLBACK = "/auth/github/callback";
+
 //Object
 
 const routes = {
@@ -40,6 +44,8 @@ const routes = {
   },
   editProfile: EDIT_PROFILE,
   changePassword: CHANGE_PASSWORD,
+  gitHub: GITHUB,
+  gitHubCallBack: GITHUB_CALLBACK,
 
   videos: VIDEOS,
   upload: UPLOAD,

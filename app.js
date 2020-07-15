@@ -15,7 +15,6 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 // @babel/node 를 이용하여, ES6의 자바스크립트 코드를, 구버전의 코드형식으로 변환해주기 때문에, 최신형태의 자바스크립트 코드를 사용하여도, 호환성문제를 해결할 수 있다.
 import "./passport";
-import dotenv from "dotenv";
 
 // 즉, babel을 이용하여, nodejs에서 최신 ES6 자바스크립트 코드를 사용할 수 있다.
 // 기존 import방식  :  const express = require("express");
