@@ -1,0 +1,73 @@
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(236, 231, 231);
+  height: 100%;
+  margin-bottom: 50px;
+  .user-profile__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    .avatar {
+      width: 180px;
+      height: 180px;
+
+      background-color: rgb(40, 38, 59);
+      border-radius: 50% 5%;
+    }
+    .profile__username {
+      font-size: 20px;
+      margin-top: 17px;
+    }
+  }
+  .user-profile__btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    a {
+      width: 180px;
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+      button {
+        font-size: 12px;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+    }
+  }
+  .user-profile__videos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 100px;
+    .videos-title {
+      width: 100%;
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 27px;
+      margin-bottom: 40px;
+    }
+    .videos-container {
+      width: 100%;
+      background-color: rgb(219, 219, 219);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      .videoBlock {
+        margin-left: 15px;
+        width: 380px;
+        video {
+          width: 380px;
+          height: 230px;
+        }
+      }
+    }
+  }
+}

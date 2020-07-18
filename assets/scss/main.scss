@@ -18,6 +18,7 @@ main {
 }
 
 button,
+.btn,
 input:not([type="file"]),
 textarea {
   padding: 7px 10px;
@@ -40,7 +41,16 @@ button {
   background-color: #3498db;
   color: white;
 }
-button.delete {
+.btn {
+  border: none;
+  color: white;
+  text-align: center;
+  background-color: #3498db;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.btn__delete {
+  padding: 7px 10px;
   background-color: $dark-red;
 }
 button,

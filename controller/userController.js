@@ -1,6 +1,7 @@
 import routes from "../routes";
 import User from "../models/user";
 import passport from "passport";
+import { STATES } from "mongoose";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
@@ -76,17 +77,70 @@ export const logout = (req, res) => {
 
 export const users = (req, res) => res.render("users", { pageTitle: "Users" });
 
-export const getMe = (req, res) => {
-  res.render("userDetail", { pageTitle: "UserDetail" });
-  console.log(req.user);
+export const getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).populate("videos");
+    res.render("userDetail", { pageTitle: "UserDetail", user });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const userDetail = (req, res) => {
-  res.render("userDetail", { pageTitle: "UserDetail" });
+export const userDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const user = await User.findById(id).populate("videos");
+    console.log("이유저는 " + user.videos);
+    res.render("userDetail", { pageTitle: "UserDetail", user });
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
 };
 
-export const editProfile = (req, res) =>
+export const getEditProfile = (req, res) => {
   res.render("editProfile", { pageTitle: "editProfile" });
+};
 
-export const changePassword = (req, res) =>
+export const postEditProfile = async (req, res) => {
+  const {
+    body: { name, email },
+    file,
+  } = req;
+  try {
+    await User.findByIdAndUpdate(req.user.id, {
+      name,
+      email,
+      avatarUrl: file ? file.path : req.user.avatarUrl,
+    });
+    res.redirect(routes.me);
+  } catch (error) {
+    console.log(error);
+    res.render("editProfile", { pageTitle: "editProfile" });
+  }
+};
+
+export const getChangePassword = (req, res) => {
   res.render("changePassword", { pageTitle: "ChangePassword" });
+};
+
+export const postChangePassword = (req, res) => {
+  const {
+    body: { oldPassword, newPassword, newPassword2 },
+  } = req;
+
+  try {
+    if (newPassword !== newPassword2) {
+      res.status(400);
+      res.redirect(`/users${routes.changePassword}`);
+      return;
+    }
+    req.user.changePassword(oldPassword, newPassword);
+    res.redirect(routes.me);
+  } catch (error) {
+    res.status(400);
+    res.redirect(`/users${routes.changePassword}`);
+  }
+};
