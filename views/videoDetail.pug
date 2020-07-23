@@ -32,6 +32,9 @@ block content
                   form.add__comment#jsAddComment
                         input(type="text", placeholder="Add a Comment")
                   ul.video__comment-list#jsCommentList
-                        each comment in video.comments.reverse()
-                              li 
-                                    span=comment.text
+                        if !loggedUser
+                              each comment in video.comments.reverse()
+                                    li
+                                          span.comment__text=comment.text
+                                    
+                                          

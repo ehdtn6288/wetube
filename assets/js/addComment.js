@@ -4,16 +4,59 @@ const addCommentForm = document.getElementById("jsAddComment");
 const commentsList = document.getElementById("jsCommentList");
 const commentNum = document.getElementById("jsCommentNum");
 
-// function increaseCommentNum() {
-//   commentNum.innerHTML = parseInt(commentNum.innerHTML) + 1;
-// }
+function decreaseCommentNum() {
+  commentNum.innerHTML = parseInt(commentNum.innerHTML) - 1;
+}
 
-const addComment = (comment) => {
+const addComment = (commentText, commentId, commentCreator, userId) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
-  span.innerHTML = comment;
+  const delBtn = document.createElement("span");
+  span.innerHTML = commentText;
+  delBtn.className = commentId;
+
+  if (commentCreator === userId) {
+    // 본인이 로그인 했을때만, 삭제표시 해주기
+    delBtn.innerHTML = "❌";
+    delBtn.classList.add("comment__delete-btn");
+    li.appendChild(delBtn);
+    delBtn.addEventListener("click", handleDelete);
+  }
+
+  span.classList.add("comment__text");
+
   li.appendChild(span); // li 안에 span 이 들어간 형태(노드)만 만들어 줌.
   commentsList.prepend(li); //.prepend or .append 를 통해 만들어진 노드를 삽입
+};
+
+const handleDelete = (event) => {
+  console.log(event.path[1]);
+  console.log(event.target.className.split(" ")[0]); //자르고 붙여서 클래스에 등록된 코멘트 id 값을 가져온다.
+  event.path[1].remove();
+  const commentId = event.target.className.split(" ")[0];
+  decreaseCommentNum();
+  removeComment(commentId);
+};
+
+// const deleteComment = () => {
+//   const delBtns = commentsList.getElementsByClassName("comment__delete-btn");
+//   for (let i = 0; i < delBtns.length; i++) {
+//     delBtns[i].addEventListener("click", () => {
+//       console.log("클릭!!");
+//     });
+//   }
+// };
+
+const removeComment = async (commentId) => {
+  const videoId = window.location.href.split("/videos/")[1];
+  const response = await axios({
+    url: `/api/${videoId}/comments`,
+    method: "DELETE",
+    data: {
+      commentId: commentId,
+    },
+  });
+  console.log(response);
 };
 
 const sendComment = async (comment) => {
@@ -25,8 +68,9 @@ const sendComment = async (comment) => {
       comment,
     },
   });
-  if (response.status == 200) {
+  if (response.status == 400) {
     // addComment(comment);
+    console.log("로그인좀 해라..");
   }
   console.log(response);
 };
@@ -38,19 +82,28 @@ const setCommentData = async () => {
   const videoId = window.location.href.split("/videos/")[1];
   try {
     const response = await axios.get(`/api/${videoId}/comments`);
-    newCommentNumber = response.data.comments.length;
-    const comments = response.data.comments;
-    console.log(originalCommentNum, newCommentNumber);
-    console.log(comments[2]);
-    if (response.status == 200) {
-      if (originalCommentNum < newCommentNumber) {
-        for (var i = originalCommentNum; i < newCommentNumber; i++) {
-          addComment(comments[i].text);
+    newCommentNumber = response.data.video.comments.length;
+    const comments = response.data.video.comments;
+    if (response.data.user) {
+      const user = response.data.user;
+      // console.log(comments[50].creator.trim(), user._id.trim());
+      // console.log(user._id == comments[50].creator);
+      // console.log(comments[2]);
+      if (response.status == 200) {
+        if (originalCommentNum != newCommentNumber) {
+          for (var i = originalCommentNum; i < newCommentNumber; i++) {
+            addComment(
+              comments[i].text,
+              comments[i]._id,
+              comments[i].creator,
+              user._id
+            );
+          }
+          originalCommentNum = newCommentNumber;
         }
-        originalCommentNum = newCommentNumber;
       }
+      setCommentNum(newCommentNumber);
     }
-    setCommentNum(newCommentNumber);
   } catch (error) {
     console.log(error);
   }
@@ -60,7 +113,22 @@ const getOriginalCommentNum = async () => {
   const videoId = window.location.href.split("/videos/")[1];
   try {
     const response = await axios.get(`/api/${videoId}/comments`);
-    originalCommentNum = response.data.comments.length;
+    const comments = response.data.video.comments;
+    if (response.data.user) {
+      const user = response.data.user;
+      console.log(comments[50].creator.trim(), user._id.trim());
+      console.log(user._id == comments[50].creator);
+      console.log(response);
+      originalCommentNum = response.data.video.comments.length;
+      for (var i = 0; i < originalCommentNum; i++) {
+        addComment(
+          comments[i].text,
+          comments[i]._id,
+          comments[i].creator,
+          user._id
+        );
+      }
+    }
   } catch (error) {
     console.log(error);
   }
@@ -68,7 +136,7 @@ const getOriginalCommentNum = async () => {
 
 function setCommentNum(commentNumber) {
   commentNum.innerHTML = commentNumber;
-  console.log(originalCommentNum);
+  // console.log(originalCommentNum);
   // 커멘트수를 추가한 뒤, original 값으로 변환
 }
 
@@ -87,8 +155,8 @@ async function handleSubmit(event) {
 function init() {
   getOriginalCommentNum(); // 시작시점의 코멘트 갯수를 가져온다.
 
-  setInterval(setCommentData, 3000); // 이걸 키면 실시간으로 댓글창의 변화를 알 수 있다.
-
+  setInterval(setCommentData, 5000); // 이걸 키면 실시간으로 댓글창의 변화를 알 수 있다.
+  removeComment();
   addCommentForm.addEventListener("submit", handleSubmit);
 }
 

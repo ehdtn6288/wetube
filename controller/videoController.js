@@ -147,11 +147,12 @@ export const postAddComments = async (req, res) => {
       creator: user.id,
     });
     video.comments.push(newComment.id);
+    user.comments.push(newComment.id);
     video.save();
+    user.save();
     res.status(200);
   } catch (error) {
     res.status(400);
-
     console.log(error);
   } finally {
     res.end();
@@ -161,10 +162,33 @@ export const postAddComments = async (req, res) => {
 export const getAddComment = async (req, res) => {
   const {
     params: { id },
+    user,
   } = req;
   try {
     const video = await Video.findById(id).populate("comments");
-    res.send(video);
+    const videoData = {
+      video,
+      user,
+    };
+    console.log("!!!!!!!!~~~~" + user);
+    res.send(videoData);
+
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
+
+export const deleteComment = async (req, res) => {
+  const {
+    body: { commentId },
+  } = req;
+  try {
+    await Comment.findOneAndRemove({ _id: commentId });
+    console.log("~~~~~~~~~~~~" + commentId);
     res.status(200);
   } catch (error) {
     res.status(400);
