@@ -1,6 +1,5 @@
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-
 import express from "express";
 import globalRouter from "./routers/globalRouter";
 import helmet from "helmet";
@@ -13,6 +12,7 @@ import passport from "passport";
 import routes from "./routes"; // import 는 알파벳 순으로 정렬
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import apiRouter from "./routers/apiRouter";
 // @babel/node 를 이용하여, ES6의 자바스크립트 코드를, 구버전의 코드형식으로 변환해주기 때문에, 최신형태의 자바스크립트 코드를 사용하여도, 호환성문제를 해결할 수 있다.
 import "./passport";
 
@@ -52,6 +52,7 @@ app.use(localsMiddleware); // 아래 라우터들이 get요청에 대한 응답�
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
+app.use(routes.api, apiRouter);
 
 export default app; // import 할때  =>   import userRouter from "./router"
 

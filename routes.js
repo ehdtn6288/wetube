@@ -26,8 +26,12 @@ const DELETE_VIDEO = "/:id/delete";
 const GITHUB = "/auth/github";
 const GITHUB_CALLBACK = "/auth/github/callback";
 
-//Object
+//Api
+const API = "/api";
+const INCREASE_VIEWS = "/:id/views";
+const ADD_COMMENTS = "/:id/comments";
 
+//Object
 const routes = {
   home: HOME,
   join: JOIN,
@@ -72,6 +76,9 @@ const routes = {
       return DELETE_VIDEO;
     }
   },
+  api: API,
+  increaseViews: INCREASE_VIEWS,
+  addComments: ADD_COMMENTS,
 };
 
 export default routes;

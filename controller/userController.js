@@ -1,7 +1,6 @@
 import routes from "../routes";
 import User from "../models/user";
 import passport from "passport";
-import { STATES } from "mongoose";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });

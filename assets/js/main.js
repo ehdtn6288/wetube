@@ -1,5 +1,3 @@
 import "../scss/styles.scss";
-
-const something = async () => {
-  console.log("somthing");
-};
+import "./videoPlayer";
+import "./addComment";
