@@ -6,7 +6,7 @@ block content
       .video-Detail__container
             .video__player                  
                   +videoPlayer({
-                        src : `/${video.fileUrl}`
+                        src : video.fileUrl
                   })
             .video__info
                   if loggedUser

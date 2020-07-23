@@ -9,6 +9,7 @@ const MODE = process.env.WEBPACK_ENV;
 const config = {
   entry: ["@babel/polyfill", ENTRY_FILE],
   mode: MODE,
+
   module: {
     rules: [
       {

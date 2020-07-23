@@ -36,17 +36,17 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { path },
+    file: { location },
   } = req;
+
   const newVideo = await Video.create({
-    fileUrl: path,
+    fileUrl: location,
     title,
     description,
     creator: req.user.id,
   });
   req.user.videos.push(newVideo.id);
   req.user.save();
-
   res.redirect(routes.videoDetail(newVideo.id));
   //To Do : Upload and save video 위에서 받은 변수 이용
 };
