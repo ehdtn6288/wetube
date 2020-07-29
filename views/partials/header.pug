@@ -3,12 +3,22 @@ header.header
         .header__column
             a(href=routes.home)
                 i.fab.fa-youtube 
-                .header__column--title 너 튜브
+                span.header__column--title WeTube
         
         .header__column
-            form(action=routes.search, method ="get")
+            form(action=routes.search, method ="get",id="form")
                 input(type="text" placeholder = "Search by term...", name="term")
-        
+                button.search__button
+                    <i class="fas fa-search"></i>
+                
+
+                    
+        .header__column
+            if(loggedUser)
+                a(href=routes.me)
+                    img(src=loggedUser.avatarUrl)
+                a(href=routes.me)
+                    span #{loggedUser.name}
         .header__column
             ul
                 if !loggedUser
@@ -23,3 +33,4 @@ header.header
                         a(href=routes.me) Profile
                     li
                         a(href=routes.logout) Logout
+.header__space

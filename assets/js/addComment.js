@@ -6,34 +6,78 @@ const commentNum = document.getElementById("jsCommentNum");
 
 function decreaseCommentNum() {
   commentNum.innerHTML = parseInt(commentNum.innerHTML) - 1;
+  originalCommentNum -= 1;
 }
 
-const addComment = (commentText, commentId, commentCreator, userId) => {
+const addComment = (
+  commentText,
+  commentId,
+  commentCreatorId,
+  userId,
+  userAvatar,
+  userName,
+  commentDate
+) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
   const delBtn = document.createElement("span");
-  span.innerHTML = commentText;
-  delBtn.className = commentId;
+  const contentBox = document.createElement("div");
+  const avatar = document.createElement("img");
+  const name = document.createElement("span");
+  const dateBox = document.createElement("div");
+  const date = document.createElement("span");
+  const time = document.createElement("span");
+  const imgLink = document.createElement("a");
 
-  if (commentCreator === userId) {
+  //프로필 사진 이미지 태그를 a 태그안에 추가시키고, a 태그는 comment.creator.id 값을 통해 해당 유저의 프로필로 가게끔 링크(href)를 건다.
+  avatar.src = userAvatar;
+  avatar.classList.add("comment-user__avatar");
+  imgLink.href = `http://localhost:4000/users/${commentCreatorId}`;
+  imgLink.appendChild(avatar);
+  li.appendChild(imgLink);
+
+  name.innerHTML = userName;
+  span.innerHTML = commentText;
+  name.classList.add("comment-user__name");
+  span.classList.add("comment__text");
+  contentBox.classList.add("comment__contnet-box");
+  contentBox.appendChild(name);
+  contentBox.appendChild(span); // li 안에 span 이 들어간 형태(노드)만 만들어 줌.
+  li.appendChild(contentBox);
+
+  const getDate = commentDate.slice(0, 10);
+  const getTime = commentDate.slice(11, 19);
+  date.innerHTML = getDate;
+  time.innerHTML = getTime;
+  dateBox.classList.add("comment__date-box");
+  dateBox.appendChild(date);
+  dateBox.appendChild(time);
+  li.appendChild(dateBox);
+
+  commentsList.prepend(li); // .prepend or .append 를 통해 만들어진 노드를 삽입
+  /// js 에서 스타일 정의하고, transition 주기
+  li.style.opacity = 0;
+  li.style.transition = "0.7s linear";
+  requestAnimationFrame(() =>
+    setTimeout(() => {
+      li.style.opacity = 1;
+    })
+  );
+  if (commentCreatorId === userId) {
     // 본인이 로그인 했을때만, 삭제표시 해주기
-    delBtn.innerHTML = "❌";
+    delBtn.className = commentId;
+    delBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
     delBtn.classList.add("comment__delete-btn");
     li.appendChild(delBtn);
     delBtn.addEventListener("click", handleDelete);
   }
-
-  span.classList.add("comment__text");
-
-  li.appendChild(span); // li 안에 span 이 들어간 형태(노드)만 만들어 줌.
-  commentsList.prepend(li); //.prepend or .append 를 통해 만들어진 노드를 삽입
 };
 
 const handleDelete = (event) => {
   console.log(event.path[1]);
-  console.log(event.target.className.split(" ")[0]); //자르고 붙여서 클래스에 등록된 코멘트 id 값을 가져온다.
-  event.path[1].remove();
-  const commentId = event.target.className.split(" ")[0];
+  console.log(event.path[1].className.split(" ")[0]); //자르고 붙여서 클래스에 등록된 코멘트 id 값을 가져온다.
+  event.path[2].remove();
+  const commentId = event.path[1].className.split(" ")[0];
   decreaseCommentNum();
   removeComment(commentId);
 };
@@ -87,7 +131,7 @@ const setCommentData = async () => {
     if (response.data.user) {
       const user = response.data.user;
       // console.log(comments[50].creator.trim(), user._id.trim());
-      // console.log(user._id == comments[50].creator);
+      // console.log(user._id == comments[50].creator);     ~~~~~~~~~!!!!!!! console.log에 존재 하지 않는 값을 넣어도. 오류가 뜬다. ..... 새로 만든 비디오에 커멘트가 50개가 없어서.... 계속 오류가 났는데... 못찾음.... console.log 조심해서 쓰자...
       // console.log(comments[2]);
       if (response.status == 200) {
         if (originalCommentNum != newCommentNumber) {
@@ -95,8 +139,11 @@ const setCommentData = async () => {
             addComment(
               comments[i].text,
               comments[i]._id,
-              comments[i].creator,
-              user._id
+              comments[i].creator._id,
+              user._id,
+              comments[i].creator.avatarUrl,
+              comments[i].creator.name,
+              comments[i].createdAt
             );
           }
           originalCommentNum = newCommentNumber;
@@ -114,18 +161,21 @@ const getOriginalCommentNum = async () => {
   try {
     const response = await axios.get(`/api/${videoId}/comments`);
     const comments = response.data.video.comments;
+    // console.log(response.data.video.comments);
+    // console.log(response.data.video.comments[1].createdAt);
     if (response.data.user) {
       const user = response.data.user;
-      console.log(comments[50].creator.trim(), user._id.trim());
-      console.log(user._id == comments[50].creator);
       console.log(response);
       originalCommentNum = response.data.video.comments.length;
       for (var i = 0; i < originalCommentNum; i++) {
         addComment(
           comments[i].text,
           comments[i]._id,
-          comments[i].creator,
-          user._id
+          comments[i].creator._id,
+          user._id,
+          comments[i].creator.avatarUrl,
+          comments[i].creator.name,
+          comments[i].createdAt
         );
       }
     }
@@ -152,10 +202,10 @@ async function handleSubmit(event) {
   console.log(comment);
 }
 
-function init() {
+async function init() {
   getOriginalCommentNum(); // 시작시점의 코멘트 갯수를 가져온다.
 
-  setInterval(setCommentData, 5000); // 이걸 키면 실시간으로 댓글창의 변화를 알 수 있다.
+  setInterval(setCommentData, 10000); // 이걸 키면 실시간으로 댓글창의 변화를 알 수 있다.
   removeComment();
   addCommentForm.addEventListener("submit", handleSubmit);
 }

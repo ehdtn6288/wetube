@@ -1,11 +1,19 @@
 mixin videoBlock(video={})
-    .videoBlock
-        a(href=routes.videoDetail(video.id))
-            video.videoBlock__thumnail(src=video.fileUrl)
-            h3.videoBlock__title=video.title
-            h6.vidoeBlock__views=video.views
-           
-            
+    .videoBlock#videoBlock 
+        span.videoBlock__duration #{video.duration}
+        a.videoBlock__video-box(href=routes.videoDetail(video.id))  
+            video.videoBlock__thumnail#videoBlockThumnail(src=video.fileUrl)
+        .videoBlock__info
+            .videoBlock__content-box
+                a.videoBlock__avatar(href=routes.userDetail(video.creatorId))
+                    img(src=video.avatarUrl)
+            .videoBlock__text-box 
+                a.videoBlock__title(href=routes.videoDetail(video.id))
+                    span=video.title
+                a.videoBlock__name(href=routes.userDetail(video.creatorId))
+                    span=video.creatorName
+            a.vidoeBlock__views(href=routes.videoDetail(video.id))
+                    span 조회수 #{video.views}회
         
 
 

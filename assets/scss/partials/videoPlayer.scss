@@ -1,9 +1,12 @@
 .videoPlayer {
   position: relative;
   width: 100%;
+
   video {
     width: 100%;
     height: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.281),
+      0 10px 20px rgba(0, 0, 0, 0.192);
   }
   &:hover {
     .videoPlayer__controls {

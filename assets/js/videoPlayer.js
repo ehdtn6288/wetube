@@ -37,8 +37,8 @@ function handleMute() {
   }
 }
 function handleEnded() {
-  increaseViews();
   videoPlayBtn.innerHTML = `<i class = "fas fa-play"></i>`;
+  increaseViews();
 }
 function exitFullscreen() {
   document.exitFullscreen();
@@ -51,7 +51,7 @@ function goFullscreen() {
   videoFullBtn.innerHTML = `<i class="fas fa-compress"></i>`;
   videoFullBtn.removeEventListener("click", goFullscreen);
   videoFullBtn.addEventListener("click", exitFullscreen);
-  console.log(videoPlayer);
+  // console.log(videoPlayer);
 }
 function handleDuration() {
   const videoDuration = videoPlayer.duration;
@@ -64,7 +64,7 @@ function getCurrentTime() {
     videoCurrentTime.innerHTML = formatData(
       Math.floor(videoPlayer.currentTime)
     );
-    console.log("표시 시간 : " + Math.floor(videoPlayer.currentTime));
+    // console.log("표시 시간 : " + Math.floor(videoPlayer.currentTime));
   }
 }
 function formatData(seconds) {
@@ -102,16 +102,16 @@ function handleVolume(event) {
 function handlePlay(event) {
   videoPlayer.currentTime = videoPlayRange.value;
   videoCurrentTime.innerHTML = formatData(videoPlayRange.value); // 바뀐 재생지점 표시해주기
-  console.log("range : " + videoPlayRange.value);
-  console.log("재생시간 : " + videoPlayer.currentTime);
+  // console.log("range : " + videoPlayRange.value);
+  // console.log("재생시간 : " + videoPlayer.currentTime);
 }
 function setCurrentRange() {
   if (!videoPlayer.paused) {
     videoPlayRange.value = videoPlayer.currentTime;
     //!! videoPlayRnage.value 의 값은 1단위 이며, 대입값이 소수점인 경우 반올림되어진다.
     /// 그래서 계속 rnage값이 변동하는 불상사가 생겼던것
-    console.log("현재시간 : " + videoPlayer.currentTime);
-    console.log("range : " + videoPlayRange.value);
+    // console.log("현재시간 : " + videoPlayer.currentTime);
+    // console.log("range : " + videoPlayRange.value);
   }
 }
 const getVideoDuration = () => {
@@ -121,6 +121,7 @@ function init() {
   videoPlayRange.value = 0;
   videoPlayRange.step = 0.01;
   videoPlayer.volume = 0.5; //초기 비디오 오디오 값을 설정해 준다.
+
   setInterval(setCurrentRange, 50);
 
   videoPlayBtn.addEventListener("click", handlePlayPause);

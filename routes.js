@@ -21,6 +21,7 @@ const UPLOAD = "/upload";
 const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
+const COMMENT_PROFILE = "/comment_profile/:id";
 
 //Github
 const GITHUB = "/auth/github";
@@ -79,6 +80,13 @@ const routes = {
   api: API,
   increaseViews: INCREASE_VIEWS,
   addComments: ADD_COMMENTS,
+  commentProfile: (id) => {
+    if (id) {
+      return `/comment_profile/${id}`;
+    } else {
+      COMMENT_PROFILE;
+    }
+  },
 };
 
 export default routes;

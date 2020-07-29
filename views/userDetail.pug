@@ -3,8 +3,11 @@ include mixins/videoBlock
 
 block content
         .user-profile        
-                .user-profile__header                           
-                        img.avatar(src=`/${user.avatarUrl}`)
+                
+                .user-porfile__title Profile                    
+                .user-profile__header
+                        .avatar-box       
+                                img.avatar(src=user.avatarUrl)
                         h3.profile__username=user.name
                         
                 .user-profile__btns
@@ -17,10 +20,15 @@ block content
                 .user-profile__videos 
                         h1.videos-title Uploaded Videos
                         .videos-container
-                                each item in user.videos
+                                
+                                each item in user.videos.reverse()
                                         +videoBlock({
                                                 id : item.id,
                                                 title : item.title,
                                                 fileUrl : item.fileUrl,
-                                                views : item.views                
+                                                views : item.views ,  
+                                                creatorName : item.creator.name,
+                                                avatarUrl : item.creator.avatarUrl,
+                                                duration : item.duration,     
+                                                creatorId : item.creator.id                  
                                         })

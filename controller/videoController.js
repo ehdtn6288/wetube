@@ -4,8 +4,15 @@ import Comment from "../models/comment";
 
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({}).sort({ _id: -1 });
-    res.render("home", { pageTitle: "Home", videos });
+    const videos = await Video.find({})
+      .sort({ _id: -1 })
+      .populate("creator")
+      .populate("comments");
+    console.log(videos[1].creator.name);
+    res.render("home", {
+      pageTitle: "Home",
+      videos,
+    });
   } catch (error) {
     console.log(error);
     res.render("home", { pageTitle: "Home", videos: [] });
@@ -35,14 +42,15 @@ export const getUpload = (req, res) => {
 
 export const postUpload = async (req, res) => {
   const {
-    body: { title, description },
+    body: { title, description, duration },
     file: { location },
   } = req;
-
+  console.log(duration);
   const newVideo = await Video.create({
     fileUrl: location,
     title,
     description,
+    duration,
     creator: req.user.id,
   });
   req.user.videos.push(newVideo.id);
@@ -58,7 +66,11 @@ export const videoDetail = async (req, res) => {
   try {
     const video = await Video.findById(id)
       .populate("creator")
-      .populate("comments");
+      .populate({
+        path: "comments",
+        model: "Comment",
+        populate: { path: "creator", model: "User" },
+      });
 
     res.render("videoDetail", { pageTitle: `${video.title}`, video });
   } catch (error) {
@@ -164,13 +176,20 @@ export const getAddComment = async (req, res) => {
     params: { id },
     user,
   } = req;
+
   try {
-    const video = await Video.findById(id).populate("comments");
+    const video = await Video.findById(id)
+      .populate("creator")
+      .populate({
+        path: "comments",
+        model: "Comment",
+        populate: { path: "creator", model: "User" },
+      });
     const videoData = {
       video,
       user,
     };
-    console.log("!!!!!!!!~~~~" + user);
+
     res.send(videoData);
 
     res.status(200);
@@ -188,7 +207,7 @@ export const deleteComment = async (req, res) => {
   } = req;
   try {
     await Comment.findOneAndRemove({ _id: commentId });
-    console.log("~~~~~~~~~~~~" + commentId);
+
     res.status(200);
   } catch (error) {
     res.status(400);
@@ -197,3 +216,17 @@ export const deleteComment = async (req, res) => {
     res.end();
   }
 };
+
+// export const commentUserDetail = async (req, res) => {
+//   const {
+//     params: { id },
+//   } = req;
+//   try {
+//     const user = await User.findById(id).populate("videos");
+
+//     res.render("userDetail", { pageTitle: "UserDetail", user });
+//   } catch (error) {
+//     console.log(error);
+//     res.redirect(routes.home);
+//   }
+// };

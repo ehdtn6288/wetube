@@ -1,0 +1,128 @@
+.video__comments {
+  margin-top: 25px;
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  .comments__title {
+    font-size: 25px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1.5px solid rgba(128, 128, 128, 0.253);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: baseline;
+    .comments__number {
+      justify-self: right;
+      font-size: 16px;
+      #jsCommentNum {
+        font-size: 20px;
+      }
+    }
+  }
+  .comments__add {
+    margin-bottom: 40px;
+    width: 100%;
+    .comment-form {
+      display: flex;
+      img {
+        align-items: baseline;
+        width: 40px;
+        height: 40px;
+        border-radius: 15px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.089),
+          0 3px 6px rgba(0, 0, 0, 0.349);
+      }
+      .comment-input {
+        margin-left: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.144);
+        background-color: rgba(0, 0, 0, 0);
+        font-size: 18px;
+        padding: 10px;
+        font-weight: 500;
+        border-radius: 0;
+        width: 55%;
+        max-width: 850px;
+        transition: 0.5s ease-in-out;
+        &::placeholder {
+          transition: 0.5s ease-in-out;
+        }
+        &:focus {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.384);
+          &::placeholder {
+            opacity: 0;
+          }
+        }
+      }
+    }
+    .unLoggedIn-mention {
+      font-size: 17px;
+      font-weight: 600;
+      opacity: 0.7;
+    }
+  }
+  .video__comment-list {
+    li {
+      transition: 1s ease-in-out;
+      background-color: rgba(0, 0, 0, 0.01);
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-columns: 50px 6fr 1fr 0.7fr;
+      align-items: center;
+      border-radius: 10px;
+      box-shadow: 0 0px 2px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+      opacity: 1;
+      font-size: 18px;
+      a {
+        align-self: start;
+        .comment-user__avatar {
+          width: 47px;
+          height: 47px;
+          border-radius: 15px;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.205),
+            0 3px 6px rgba(0, 0, 0, 0.349);
+          transition: 0.2s linear;
+          &:hover {
+            transform: scale(1.05, 1.05);
+          }
+        }
+      }
+      .comment__contnet-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 8px;
+        align-self: start;
+        padding-top: 5px;
+        .comment-user__name {
+          font-size: 0.8em;
+          font-weight: 600;
+          margin-bottom: 8px;
+          opacity: 0.7;
+        }
+        .comment__text {
+          font-size: 0.8em;
+          font-weight: 600;
+          color: rgba(0, 0, 0, 0.55);
+        }
+      }
+      .comment__date-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        font-size: 10px;
+        opacity: 0.5;
+      }
+      .comment__delete-btn {
+        justify-self: right;
+        color: rgba(44, 39, 39, 0.5);
+        font-size: 0.8rem;
+        padding-right: 10px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "Wetube";
   res.locals.routes = routes;
   res.locals.loggedUser = req.user || null; // 글로벌하게 줄 사용자 로그인 변수
-  console.log(req.user);
+  // console.log("현재 접속자 아이디 " + req.user);
   next();
 };
 

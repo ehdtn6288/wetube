@@ -60,6 +60,8 @@ export const postGithubLogin = (req, res) => {
 };
 
 export const getLogin = (req, res) => {
+  // console.log(backUrl);
+
   res.render("login", { pageTitle: "Login" });
 };
 
@@ -78,7 +80,11 @@ export const users = (req, res) => res.render("users", { pageTitle: "Users" });
 
 export const getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).populate("videos");
+    const user = await User.findById(req.user.id).populate({
+      path: "videos",
+      model: "Video",
+      populate: { path: "creator", model: "User" },
+    });
     res.render("userDetail", { pageTitle: "UserDetail", user });
   } catch (error) {
     console.log(error);
@@ -90,7 +96,11 @@ export const userDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
-    const user = await User.findById(id).populate("videos");
+    const user = await User.findById(id).populate({
+      path: "videos",
+      model: "Video",
+      populate: { path: "creator", model: "User" },
+    });
     console.log("이유저는 " + user.videos);
     res.render("userDetail", { pageTitle: "UserDetail", user });
   } catch (error) {

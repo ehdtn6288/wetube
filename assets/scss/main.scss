@@ -15,6 +15,7 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   min-height: 70vh;
+  padding: 0 20px;
 }
 
 button,
@@ -57,4 +58,11 @@ button {
 button,
 input[type="submit"] {
   cursor: pointer;
+}
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
 }
