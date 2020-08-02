@@ -8,10 +8,21 @@ export const home = async (req, res) => {
       .sort({ _id: -1 })
       .populate("creator")
       .populate("comments");
-    console.log(videos[1].creator.name);
+
+    const videos_view_sorted = await Video.find({})
+      .sort({ views: -1 })
+      .populate("creator")
+      .populate("comments");
+
+    const videos_totalComments_sorted = await Video.find({})
+      .sort({ totalComments: -1 })
+      .populate("creator")
+      .populate("comments");
     res.render("home", {
       pageTitle: "Home",
       videos,
+      videos_view_sorted,
+      videos_totalComments_sorted,
     });
   } catch (error) {
     console.log(error);
@@ -43,11 +54,11 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
   const {
     body: { title, description, duration },
-    file: { location },
+    file: { path },
   } = req;
-  console.log(duration);
+  console.log("~~~~~~~~~~" + path);
   const newVideo = await Video.create({
-    fileUrl: location,
+    fileUrl: path,
     title,
     description,
     duration,
@@ -66,6 +77,7 @@ export const videoDetail = async (req, res) => {
   try {
     const video = await Video.findById(id)
       .populate("creator")
+      .populate("subComments") //~~!! populate 해줘야  view 에서 length 데이터를 제대로 가져올 수 있다. sinon, 값이 지워져도 개수에 반영되지 않는다.
       .populate({
         path: "comments",
         model: "Comment",
@@ -157,9 +169,14 @@ export const postAddComments = async (req, res) => {
     const newComment = await Comment.create({
       text: comment,
       creator: user.id,
+      video: id,
+      createdAt: Date.now(),
     });
+
     video.comments.push(newComment.id);
+    video.totalComments += 1;
     user.comments.push(newComment.id);
+    console.log("~~~~~!!!!" + video.totalComments);
     video.save();
     user.save();
     res.status(200);
@@ -181,9 +198,28 @@ export const getAddComment = async (req, res) => {
     const video = await Video.findById(id)
       .populate("creator")
       .populate({
+        path: "subComments",
+        model: "Comment",
+        populate: [
+          {
+            path: "subComments",
+            model: "Comment",
+            populate: { path: "creator", model: "User" },
+          },
+          ,
+        ],
+      })
+      .populate({
         path: "comments",
         model: "Comment",
-        populate: { path: "creator", model: "User" },
+        populate: [
+          { path: "creator", model: "User" },
+          {
+            path: "subComments",
+            model: "Comment",
+            populate: { path: "creator", model: "User" },
+          },
+        ],
       });
     const videoData = {
       video,
@@ -204,10 +240,53 @@ export const getAddComment = async (req, res) => {
 export const deleteComment = async (req, res) => {
   const {
     body: { commentId },
+    params: { id },
   } = req;
   try {
-    await Comment.findOneAndRemove({ _id: commentId });
+    await Comment.findOneAndDelete({ _id: commentId });
+    const subComments = await Comment.find({ comment: commentId });
+    await Comment.find({ comment: commentId }).remove();
 
+    const video = await Video.findById(id);
+    console.log("~!!!!!!!!!!!!!!!!!!!!" + subComments.length);
+    // console.log("~~~~~~~~~~~~~~~~~" + comments);
+    video.totalComments += -1 - subComments.length;
+    video.save();
+    console.log("video TotalComments" + video.totalComments);
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
+
+export const postAddSubComment = async (req, res) => {
+  const {
+    body: { commentId, subComment },
+    params: { id },
+    user,
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    const comment = await Comment.findById(commentId);
+    const newSubComment = await Comment.create({
+      text: subComment,
+      creator: user.id,
+      video: id,
+      comment: comment.id,
+      createdAt: Date.now(),
+    });
+    comment.subComments.push(newSubComment.id);
+    user.subComments.push(newSubComment.id);
+    video.subComments.push(newSubComment.id);
+    video.totalComments += 1;
+
+    video.save();
+    user.save();
+    comment.save();
+    console.log("~~~~~!!!!" + video.totalComments);
     res.status(200);
   } catch (error) {
     res.status(400);

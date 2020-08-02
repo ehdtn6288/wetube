@@ -1,12 +1,12 @@
 mixin videoBlock(video={})
-    .videoBlock#videoBlock 
+    .videoBlock
         span.videoBlock__duration #{video.duration}
         a.videoBlock__video-box(href=routes.videoDetail(video.id))  
-            video.videoBlock__thumnail#videoBlockThumnail(src=video.fileUrl)
+            video.videoBlock__thumnail#videoBlockThumnail(src=`/${video.fileUrl}`)
         .videoBlock__info
             .videoBlock__content-box
                 a.videoBlock__avatar(href=routes.userDetail(video.creatorId))
-                    img(src=video.avatarUrl)
+                    img(src=`/${video.avatarUrl}`)
             .videoBlock__text-box 
                 a.videoBlock__title(href=routes.videoDetail(video.id))
                     span=video.title
@@ -14,6 +14,9 @@ mixin videoBlock(video={})
                     span=video.creatorName
             a.vidoeBlock__views(href=routes.videoDetail(video.id))
                     span 조회수 #{video.views}회
+                    
+            span.dateDif #{video.createdAt}
         
+           
 
-
+            

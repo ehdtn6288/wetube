@@ -25,6 +25,16 @@ const VideoSchema = new mongoose.Schema({
       ref: "Comment", //Comment모델과 연결
     },
   ],
+  subComments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
+  totalComments: {
+    type: Number,
+    default: 0,
+  },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

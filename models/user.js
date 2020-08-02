@@ -19,6 +19,12 @@ const UserSchema = new mongoose.Schema({
       ref: "Comment",
     },
   ],
+  subComments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });

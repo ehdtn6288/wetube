@@ -7,7 +7,7 @@ block content
         .videos__title
             span 최신 순
         .videos__latestVideos        
-   
+                      
             each item in videos.slice(0,5)
                  +videoBlock({
                     id : item.id,
@@ -17,15 +17,17 @@ block content
                     creatorName : item.creator.name,
                     avatarUrl : item.creator.avatarUrl,
                     duration : item.duration,     
-                    creatorId : item.creator.id                        
+                    creatorId : item.creator.id,
+                    createdAt : item.createdAt
+
                 })
                        
 
         .videos__title
             span 댓글 순
         .videos__commentsSorted
-            - const videos_comments_sorted = videos.sort(function (a, b) { return a.comments.length > b.comments.length ? -1: a.comments.length < b.comments.length? 1: 0;});
-            each item in videos_comments_sorted
+            
+            each item in videos_totalComments_sorted
                 +videoBlock({
                     id : item.id,
                     title : item.title,
@@ -34,7 +36,8 @@ block content
                     creatorName : item.creator.name,
                     avatarUrl : item.creator.avatarUrl,
                     duration : item.duration,
-                    creatorId : item.creator.id       
+                    creatorId : item.creator.id,
+                    createdAt : item.createdAt       
 
            
                 })
@@ -42,8 +45,7 @@ block content
         .videos__title
             span 많이 본 비디오 
         .videos__viewsSorted   
-            - const videos_views_sorted = videos.sort(function (a, b) {return a.views > b.views ? -1 : a.views < b.views ? 1 : 0;});
-            each item in videos_views_sorted
+            each item in videos_view_sorted
                 +videoBlock({
                     id : item.id,
                     title : item.title,
@@ -52,5 +54,6 @@ block content
                     creatorName : item.creator.name,
                     avatarUrl : item.creator.avatarUrl,
                     duration : item.duration,
-                    creatorId : item.creator.id                    
+                    creatorId : item.creator.id,
+                    createdAt : item.createdAt                    
                 })

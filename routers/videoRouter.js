@@ -7,7 +7,6 @@ import {
   postUpload,
   getEditVideo,
   postEditVideo,
-  commentUserDetail,
 } from "../controller/videoController";
 import { uploadVideo, onlyPrivate } from "../middlewares";
 

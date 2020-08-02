@@ -1,6 +1,7 @@
 .home-videos {
   width: 100%;
-  max-width: 1200px;
+  min-width: 1000px; // 고정값으로 줘서, 브라우저 가로폭이 좁아짐에 따라, 컨텐츠 크기 변하지 않게 하기.
+  //좌우에 padding 20px 고려해서 1200 - 40 = 1160px
 }
 .videos__title {
   font-size: 25px;
@@ -13,12 +14,13 @@
 }
 .videos__latestVideos {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-gap: 20px;
   row-gap: 40px;
   width: 100%;
   margin-bottom: 70px;
   .videoBlock {
+    min-width: 230px;
     .videoBlock__title {
       font-weight: 500;
     }
@@ -35,6 +37,7 @@
   .videoBlock:nth-child(1),
   .videoBlock:nth-child(2) {
     grid-column: span 6;
+
     .videoBlock__content-box {
       .videoBlock__avatar {
         img {
@@ -57,6 +60,7 @@
   }
   .videoBlock {
     grid-column: span 3;
+
     .videoBlock__content-box {
       .videoBlock__avatar {
         img {

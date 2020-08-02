@@ -5,6 +5,7 @@
   width: 100%;
   z-index: 1000;
   transition: 0.3s ease-in-out;
+  // justify-items: center;
   &:hover {
     background-color: rgba(253, 253, 253, 0.973);
   }
@@ -16,6 +17,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 3.5fr 1.5fr 1.5fr;
+    // justify-items: center;
     align-items: center;
     .header__column {
       a {

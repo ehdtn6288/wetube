@@ -31,6 +31,7 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 const API = "/api";
 const INCREASE_VIEWS = "/:id/views";
 const ADD_COMMENTS = "/:id/comments";
+const ADD_SUB_COMMENT = "/:id/subComments";
 
 //Object
 const routes = {
@@ -80,6 +81,7 @@ const routes = {
   api: API,
   increaseViews: INCREASE_VIEWS,
   addComments: ADD_COMMENTS,
+  addSubComments: ADD_SUB_COMMENT,
   commentProfile: (id) => {
     if (id) {
       return `/comment_profile/${id}`;

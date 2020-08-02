@@ -85,6 +85,7 @@ function formatData(seconds) {
 
   return `${hours}:${mins}:${totaleSeconds} `;
 }
+
 function handleVolume(event) {
   const {
     target: { value },

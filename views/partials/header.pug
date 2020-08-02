@@ -16,7 +16,8 @@ header.header
         .header__column
             if(loggedUser)
                 a(href=routes.me)
-                    img(src=loggedUser.avatarUrl)
+                    if(loggedUser.avatarUrl)
+                        img(src=`/${loggedUser.avatarUrl}`)
                 a(href=routes.me)
                     span #{loggedUser.name}
         .header__column
