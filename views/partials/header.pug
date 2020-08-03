@@ -1,0 +1,37 @@
+header.header
+    .header__wrapper
+        .header__column
+            a(href=routes.home)
+                i.fab.fa-youtube 
+                span.header__column--title WeTube
+        
+        .header__column
+            form(action=routes.search, method ="get",id="form")
+                input(type="text" placeholder = "Search by term...", name="term")
+                button.search__button
+                    <i class="fas fa-search"></i>
+                
+
+                    
+        .header__column
+            if(loggedUser)
+                a(href=routes.me)
+                    if(loggedUser.avatarUrl)
+                        img(src=`/${loggedUser.avatarUrl}`)
+                a(href=routes.me)
+                    span #{loggedUser.name}
+        .header__column
+            ul
+                if !loggedUser
+                    li 
+                        a(href=routes.join) Join
+                    li
+                        a(href=routes.login) Log In
+                else    
+                    li
+                        a(href=`/videos${routes.upload}`) Upload
+                    li
+                        a(href=routes.me) Profile
+                    li
+                        a(href=routes.logout) Logout
+.header__space

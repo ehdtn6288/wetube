@@ -1,0 +1,76 @@
+extends layouts/main
+include mixins/videoPlayer
+
+
+block content
+      .video-Detail__container
+            .video__player                  
+                  +videoPlayer({
+                        src : `/${video.fileUrl}`
+                  })
+            .video__info
+                  .video__title-wraper
+                        .video__title #{video.title}
+                        
+                        if loggedUser
+                              if video.creator.id === loggedUser.id
+                                    a.video__editBtn(href=routes.editVideo(video.id)) 
+                                          button Edit Video                        
+                  .video__view-date-box
+                        span.video__views
+                              span 조회수                                 
+                              span#jsVideoViews #{video.views}
+                              |회 
+                        span.video__date
+                              i.far.fa-clock
+                              span  #{video.createdAt.getFullYear()}. #{video.createdAt.getMonth()+1}. #{video.createdAt.getDate()}
+                  .video__author-box
+                        a(href=routes.userDetail(video.creator.id))
+                              img.video-author__avatar(src=`/${video.creator.avatarUrl}`)
+                              span.video-author #{video.creator.name}
+                  .video__description #{video.description}
+            .video__comments  
+                  .comments__title
+                        span Comments
+
+                        .comments__number                        
+                              if video.comments.length == 1 
+                                    span.video__comment-number
+                                          span#jsCommentNum 1 
+                                          span comment
+                              else 
+                                    span.video__comment-number
+                                          span#jsCommentNum #{video.comments.length+video.subComments.length} 
+                                          //- 
+                                          span  Comments
+
+                  .comments__add
+                        form.comment-form#jsAddComment
+                              if loggedUser
+                                    img(src=`/${loggedUser.avatarUrl}`)#jsCommentAvatar
+                                    input.comment-input(type="text",placeholder="Add a Comment")
+                              else  
+                                    span.unLoggedIn-mention 댓글을 달려면 
+                                          a(href=routes.login) 로그인 
+                                          | 하세요~ 
+
+                  ul.video__comment-list#jsCommentList
+                        if !loggedUser
+                              each comment in video.comments.reverse()
+                                    li    
+                                          .comment-box
+                                                a(href=routes.userDetail(comment.creator.id))
+                                                      img.comment-user__avatar(src=`/${comment.creator.avatarUrl}`)
+                                                .comment__contnet-box
+                                                      span.comment-user__name=comment.creator.name
+                                                      span.comment__text=comment.text
+                                                .comment__date-box
+                                                .comment__option-box
+                                                      span.comment__subComment-btn
+                                                      span.comment__delete-btn
+                                          .subComment-box
+                                                input.subComment__input
+                                                ul
+                                                      li
+
+                                          

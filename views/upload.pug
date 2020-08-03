@@ -1,0 +1,24 @@
+extends layouts/main
+include mixins/videoPlayer
+
+block content
+    .form-container
+        .fileUpload__preview#fileUploadContainer
+            +videoPlayer({
+                
+            })
+            label#jsUploadLabel(for="file").preview__label Video Upload
+        form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
+            .fileUpload                
+                //- video#videoPreview(src="", controls = "true", width="720px")
+                label(for="file") 비디오 가져오기
+                input(type="file", id="file", name="videoFile", required = true, accept="video/*")
+            .file__info#jsFileInfo
+                span.file__name#jsFileName 파일 정보
+                span.file__size#jsFileSize 
+                span.file__type#jsFileType  
+            input(type="text", placeholder ="Title", name="title", required = true)
+            input(type="text", placeholder ="Duration", name="duration", required = true, readonly)
+            textarea(name="description", placeholder="Description", required = true)
+            input(type="submit", value="업로드")
+            

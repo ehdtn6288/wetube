@@ -1,0 +1,34 @@
+extends layouts/main
+include mixins/videoBlock
+
+block content
+        .user-profile        
+                
+                .user-porfile__title Profile                    
+                .user-profile__header
+                        .avatar-box       
+                                img.avatar(src=`/${user.avatarUrl}`)
+                        h3.profile__username=user.name
+                        
+                .user-profile__btns
+                        if loggedUser
+                                if user.id === loggedUser.id
+                                        a.edit-profile(href=`/users${routes.editProfile}`) 
+                                                button 📝 Edit Profile
+                                        a.change-password(href=`/users${routes.changePassword}`) 
+                                                button 🔏 Change Password
+                .user-profile__videos 
+                        h1.videos-title Uploaded Videos
+                        .videos-container
+                                
+                                each item in user.videos.reverse()
+                                        +videoBlock({
+                                                id : item.id,
+                                                title : item.title,
+                                                fileUrl : item.fileUrl,
+                                                views : item.views ,  
+                                                creatorName : item.creator.name,
+                                                avatarUrl : item.creator.avatarUrl,
+                                                duration : item.duration,     
+                                                creatorId : item.creator.id                  
+                                        })

@@ -1,0 +1,59 @@
+extends layouts/main
+include mixins/videoBlock
+
+block content
+    .home-videos
+
+        .videos__title
+            span 최신 순
+        .videos__latestVideos        
+                      
+            each item in videos.slice(0,5)
+                 +videoBlock({
+                    id : item.id,
+                    title : item.title,
+                    fileUrl : item.fileUrl,
+                    views : item.views ,  
+                    creatorName : item.creator.name,
+                    avatarUrl : item.creator.avatarUrl,
+                    duration : item.duration,     
+                    creatorId : item.creator.id,
+                    createdAt : item.createdAt
+
+                })
+                       
+
+        .videos__title
+            span 댓글 순
+        .videos__commentsSorted
+            
+            each item in videos_totalComments_sorted
+                +videoBlock({
+                    id : item.id,
+                    title : item.title,
+                    fileUrl : item.fileUrl,
+                    views : item.views ,  
+                    creatorName : item.creator.name,
+                    avatarUrl : item.creator.avatarUrl,
+                    duration : item.duration,
+                    creatorId : item.creator.id,
+                    createdAt : item.createdAt       
+
+           
+                })
+
+        .videos__title
+            span 많이 본 비디오 
+        .videos__viewsSorted   
+            each item in videos_view_sorted
+                +videoBlock({
+                    id : item.id,
+                    title : item.title,
+                    fileUrl : item.fileUrl,
+                    views : item.views ,  
+                    creatorName : item.creator.name,
+                    avatarUrl : item.creator.avatarUrl,
+                    duration : item.duration,
+                    creatorId : item.creator.id,
+                    createdAt : item.createdAt                    
+                })
