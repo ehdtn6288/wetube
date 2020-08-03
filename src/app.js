@@ -29,7 +29,7 @@ const CookieStore = MongoStore(session);
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
-app.use("/uploads", express.static("src/uploads")); //정적 파일이 저장되어있는 경로가 /uploads 안에 있으므로,
+app.use("/uploads", express.static("uploads")); //정적 파일이 저장되어있는 경로가 /uploads 안에 있으므로,
 // app.use("/static", express.static("static"));
 app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(helmet());
