@@ -29,8 +29,8 @@ export const localsMiddleware = (req, res, next) => {
 //     bucket: "practicewetube/avatars",
 //   }),
 // });
-const multerVideo = multer({ dest: "uploads/videos" });
-const multerAvatar = multer({ dest: "uploads/avatars" });
+const multerVideo = multer({ dest: "src/uploads/videos" });
+const multerAvatar = multer({ dest: "src/uploads/avatars" });
 export const uploadVideo = multerVideo.single("videoFile");
 export const uploadAvatar = multerAvatar.single("avatar");
 
