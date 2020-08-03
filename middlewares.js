@@ -44,10 +44,10 @@ var localsMiddleware = function localsMiddleware(req, res, next) {
 
 exports.localsMiddleware = localsMiddleware;
 var multerVideo = (0, _multer["default"])({
-  dest: "src/uploads/videos"
+  dest: "uploads/videos"
 });
 var multerAvatar = (0, _multer["default"])({
-  dest: "src/uploads/avatars"
+  dest: "uploads/avatars"
 });
 var uploadVideo = multerVideo.single("videoFile");
 exports.uploadVideo = uploadVideo;
