@@ -241,7 +241,7 @@ const handleSubComment = async (event) => {
   const videoId = window.location.href.split("/videos/")[1];
   try {
     const response = await axios.get(`/api/${videoId}/comments`);
-    console.log(response);
+    // console.log("~~!!!!!" + response);
     const comments = response.data.video.comments;
     const VideoSubComments = response.data.video.subComments;
     const videoAllComments = comments.concat(VideoSubComments);
@@ -268,7 +268,7 @@ const handleSubComment = async (event) => {
             subComments[j]._id,
             subComments[j].creator._id,
             user._id,
-            `/${subComments[j].creator.avatarUrl}`,
+            `${subComments[j].creator.avatarUrl}`,
             subComments[j].creator.name,
             subComments[j].createdAt,
             subCommentBox,
@@ -320,7 +320,7 @@ const postSubComment = async (event) => {
               subComments[j]._id,
               subComments[j].creator._id,
               user._id,
-              `/${subComments[j].creator.avatarUrl}`,
+              `${subComments[j].creator.avatarUrl}`,
               subComments[j].creator.name,
               subComments[j].createdAt,
               subCommentBox,
@@ -385,7 +385,7 @@ const removeComment = async (commentId) => {
       commentId: commentId,
     },
   });
-  console.log(response);
+  // console.log(response);
 };
 
 const sendSubComment = async (commentId, subComment) => {
@@ -398,7 +398,7 @@ const sendSubComment = async (commentId, subComment) => {
       subComment,
     },
   });
-  console.log(response);
+  // console.log(response);
 };
 
 const sendComment = async (comment) => {
@@ -414,7 +414,7 @@ const sendComment = async (comment) => {
     // addComment(comment);
     console.log("로그인좀 해라..");
   }
-  console.log(response);
+  // console.log(response);
 };
 
 let originalCommentNum;
@@ -445,7 +445,7 @@ const setCommentData = async () => {
               comments[i]._id,
               comments[i].creator._id,
               user._id,
-              `/${comments[i].creator.avatarUrl}`,
+              `${comments[i].creator.avatarUrl}`,
               comments[i].creator.name,
               comments[i].createdAt,
               commentsList,
@@ -467,12 +467,13 @@ const getOriginalCommentNum = async () => {
   try {
     const response = await axios.get(`/api/${videoId}/comments`);
     const comments = response.data.video.comments;
+    console.log("응답 정보111");
     // console.log(response.data.video.comments);
     // console.log(response.data.video.comments[1].createdAt);
     if (response.data.user) {
       const user = response.data.user;
       const video = response.data.video;
-      console.log(response);
+
       originalCommentNum = response.data.video.comments.length;
       for (var i = 0; i < originalCommentNum; i++) {
         addComment(
@@ -480,7 +481,7 @@ const getOriginalCommentNum = async () => {
           comments[i]._id,
           comments[i].creator._id,
           user._id,
-          `/${comments[i].creator.avatarUrl}`,
+          `${comments[i].creator.avatarUrl}`,
           comments[i].creator.name,
           comments[i].createdAt,
           commentsList,
