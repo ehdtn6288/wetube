@@ -322,6 +322,77 @@
             }
           }
         }
+        .subComment-box {
+          form {
+            .subComment__avatar {
+              width: 25px;
+              height: 25px;
+              border-radius: 10px;
+              box-shadow: 0 3px 6px rgba(0, 0, 0, 0.089),
+                0 3px 6px rgba(0, 0, 0, 0.349);
+            }
+            .subComment__input {
+              font-size: 0.7em;
+              font-weight: 500;
+
+              max-width: 850px;
+
+              &::placeholder {
+                font-size: 14px;
+              }
+            }
+          }
+          li {
+            background-color: rgba(236, 236, 236, 0.685);
+            box-shadow: 0 0px 6px rgba(0, 0, 0, 0.068),
+              0 1px 6px rgba(0, 0, 0, 0.041);
+            .comment-box {
+              display: grid;
+              grid-template-columns: 27px 6fr 1fr 30px;
+              align-items: center;
+
+              a {
+                align-self: start;
+                .comment-user__avatar {
+                  width: 24px;
+                  height: 24px;
+                  border-radius: 10px;
+                }
+              }
+              .comment__contnet-box {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 8px;
+                align-self: start;
+                padding-top: 0px;
+                .comment-user__name {
+                  font-size: 0.5em;
+                  font-weight: 500;
+                  margin-bottom: 8px;
+                  opacity: 0.7;
+                }
+                .comment__text {
+                  font-size: 0.6em;
+                  font-weight: 500;
+                  color: rgba(0, 0, 0, 0.55);
+                }
+              }
+              .comment__date-box {
+                font-size: 8px;
+
+                span:last-child {
+                  top: -15px;
+                }
+              }
+              .comment__option-box {
+                .comment__delete-btn {
+                  font-size: 0.6rem;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
