@@ -25,6 +25,7 @@
     width: 100%;
     .comment-form {
       display: flex;
+      align-items: center;
       img {
         align-items: baseline;
         width: 40px;
@@ -53,6 +54,21 @@
           &::placeholder {
             opacity: 0;
           }
+        }
+      }
+      .comment-input__button {
+        margin-left: 10px;
+        width: 70px;
+        height: 35px;
+        background-color: rgba(0, 0, 0, 0.075);
+        color: white;
+        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.062),
+          0 5px 7px rgba(0, 0, 0, 0.075);
+        transition: 0.2s linear;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.425);
+          box-shadow: 0 5px 7px rgba(0, 0, 0, 0.205),
+            0 5px 7px rgba(0, 0, 0, 0.24);
         }
       }
     }
@@ -169,7 +185,7 @@
       margin-left: 50px;
       form {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         margin-bottom: 25px;
         margin-top: 20px;
         .subComment__avatar {
@@ -201,6 +217,22 @@
             &::placeholder {
               opacity: 0;
             }
+          }
+        }
+        .comment-input__button {
+          margin-left: 10px;
+          width: 50px;
+          height: 28px;
+          font-size: 0.6em;
+          background-color: rgba(0, 0, 0, 0.075);
+          color: white;
+          box-shadow: 0 5px 7px rgba(0, 0, 0, 0.062),
+            0 5px 7px rgba(0, 0, 0, 0.075);
+          transition: 0.2s linear;
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.425);
+            box-shadow: 0 5px 7px rgba(0, 0, 0, 0.205),
+              0 5px 7px rgba(0, 0, 0, 0.24);
           }
         }
       }
@@ -281,7 +313,7 @@
       .video__comment-list {
         li {
           .comment-box {
-            grid-template-columns: 34px 5fr 1fr 2fr;
+            grid-template-columns: 34px 4fr 1fr 2fr;
 
             a {
               align-self: start;
@@ -292,7 +324,7 @@
               }
             }
             .comment__date-box {
-              font-size: 0.5em;
+              font-size: 0.4em;
               padding-top: 3px;
               span:last-child {
                 width: 200px;
@@ -379,7 +411,7 @@
                 }
               }
               .comment__date-box {
-                font-size: 8px;
+                font-size: 7px;
 
                 span:last-child {
                   top: -15px;

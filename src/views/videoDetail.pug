@@ -49,6 +49,7 @@ block content
                               if loggedUser
                                     img(src=loggedUser.avatarUrl)#jsCommentAvatar
                                     input.comment-input(type="text",placeholder="Add a Comment")
+                                    input.comment-input__button(type="submit", value="Add")
                               else  
                                     span.unLoggedIn-mention 댓글을 달려면 
                                           a(href=routes.login) 로그인 

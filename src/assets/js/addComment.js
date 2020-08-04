@@ -228,13 +228,18 @@ const handleSubComment = async (event) => {
   const avatar = document.createElement("img");
   const form = document.createElement("form");
   const input = document.createElement("input");
+  const submintBtn = document.createElement("input");
 
   avatar.src = commentAvatar.src;
   avatar.className = "subComment__avatar";
   input.placeholder = "Add Subcomments";
   input.className = "subComment__input";
+  submintBtn.value = "Add";
+  submintBtn.type = "submit";
+  submintBtn.className = "comment-input__button";
   form.appendChild(avatar);
   form.appendChild(input);
+  form.appendChild(submintBtn);
   form.addEventListener("submit", postSubComment);
   subCommentBox.className = "subComment-box";
   subCommentBox.appendChild(form);
