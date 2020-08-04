@@ -13,7 +13,7 @@ function openMenuHandler() {
   setTimeout(() => {
     headerBgWrap.style.opacity = 1;
     headerOptions.style.opacity = 1;
-  }, 0);
+  }, 10);
 }
 
 function exitMenuHandler() {
