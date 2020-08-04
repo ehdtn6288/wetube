@@ -131,10 +131,12 @@ export const deleteVideo = async (req, res) => {
 
   try {
     const video = await Video.findById(id);
+
     if (video.creator != req.user.id) {
       throw Error();
     } else {
       await Video.findOneAndRemove({ _id: id });
+      await Comment.find({ video: id }).remove();
     }
   } catch (error) {
     console.log(error);
