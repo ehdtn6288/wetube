@@ -244,7 +244,7 @@
 @media screen and (max-width: 768px) {
   .header {
     .header__wrapper {
-      grid-template-columns: 110px 1fr 40px 40px;
+      grid-template-columns: 30px 1fr 40px 40px;
       // justify-items: center;
       align-items: center;
       .header__column {
@@ -254,9 +254,10 @@
             align-items: center;
             color: rgba(245, 0, 0, 0.712);
             i {
-              font-size: 29px;
+              font-size: 28px;
             }
             .header__column--title {
+              display: none;
               font-size: 1.2em;
               margin-left: 10px;
               padding-top: 2.5px;
