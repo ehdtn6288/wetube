@@ -72,3 +72,23 @@
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .form-container {
+    .fileUpload__preview {
+      width: 400px;
+      .preview__label {
+        cursor: pointer;
+        width: 180px;
+        opacity: 0.5;
+        font-size: 2em;
+        top: 75px;
+        left: 127px;
+        position: absolute;
+        transition: 0.5s linear;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

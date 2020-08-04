@@ -3,3 +3,4 @@ import "./videoPlayer";
 import "./addComment";
 import "./uploadVideo";
 import "./home";
+import "./header";

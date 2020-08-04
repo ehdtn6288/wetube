@@ -1,100 +1,161 @@
 .home-videos {
   width: 100%;
-  min-width: 1000px; // 고정값으로 줘서, 브라우저 가로폭이 좁아짐에 따라, 컨텐츠 크기 변하지 않게 하기.
-  //좌우에 padding 20px 고려해서 1200 - 40 = 1160px
-}
-.videos__title {
-  font-size: 25px;
-  font-weight: 700;
-  opacity: 0.8;
-
-  padding-bottom: 10px;
-  margin-bottom: 40px;
-  border-bottom: 1.5px solid rgba(128, 128, 128, 0.253);
+  .videos__title {
+    font-size: 25px;
+    font-style: oblique;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.541);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.288);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+  }
 }
 .videos__latestVideos {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-gap: 20px;
-  row-gap: 40px;
-  width: 100%;
-  margin-bottom: 70px;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 20px;
+  row-gap: 30px;
+  margin-bottom: 50px;
   .videoBlock {
-    min-width: 230px;
-    .videoBlock__title {
-      font-weight: 500;
-    }
+    grid-column: span 4;
   }
 }
 .videos__commentsSorted {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-gap: 20px;
-  row-gap: 50px;
-  width: 325;
-  margin-bottom: 70px;
-
-  .videoBlock:nth-child(1),
-  .videoBlock:nth-child(2) {
-    grid-column: span 6;
-
-    .videoBlock__content-box {
-      .videoBlock__avatar {
-        img {
-          width: 40px;
-          height: 40px;
-        }
-      }
-    }
-    .videoBlock__text-box {
-      .videoBlock__title {
-        font-size: 21px;
-      }
-      .videoBlock__name {
-        font-size: 15px;
-      }
-    }
-    .vidoeBlock__views {
-      font-size: 13px;
-    }
-  }
+  column-gap: 20px;
+  row-gap: 30px;
+  margin-bottom: 50px;
   .videoBlock {
     grid-column: span 3;
-
-    .videoBlock__content-box {
-      .videoBlock__avatar {
-        img {
-          width: 25px;
-          height: 25px;
-        }
-      }
-    }
   }
-  // .videoBlock:first-child,
-  // .videoBlock:nth-child(2) {
-  //   grid-column: span 3; // 6개 열중에서, 앞에 2개 비디오가 열 3개씩 먹고
-  // }
-  // .videoBlock:nth-child(3),
-  // .videoBlock:nth-child(4),
-  // .videoBlock:nth-child(5) {
-  //   grid-column: span 2; // 뒤에 3개 비디오가 6개 열중에서 각각 2개열씩 먹는다
-  // }
 }
 
 .videos__viewsSorted {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 30px;
-  row-gap: 50px;
-  width: 100%;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 20px;
+  row-gap: 30px;
+  margin-bottom: 50px;
   .videoBlock {
-    .videoBlock__content-box {
-      .videoBlock__avatar {
-        img {
-          width: 35px;
-          height: 35px;
-        }
-      }
+    grid-column: span 3;
+  }
+}
+@media screen and (max-width: 850px) {
+  .videos__latestVideos,
+  .videos__commentsSorted,
+  .videos__viewsSorted {
+    .videoBlock {
+      grid-column: span 6;
     }
   }
 }
+@media screen and (max-width: 550px) {
+  .videos__latestVideos,
+  .videos__commentsSorted,
+  .videos__viewsSorted {
+    .videoBlock {
+      grid-column: span 12;
+    }
+  }
+}
+
+// .home-videos {
+//   width: 100%;
+//   // min-width: 1000px; // 고정값으로 줘서, 브라우저 가로폭이 좁아짐에 따라, 컨텐츠 크기 변하지 않게 하기.
+//   //좌우에 padding 20px 고려해서 1200 - 40 = 1160px
+// }
+// .videos__title {
+//   font-size: 25px;
+//   font-weight: 700;
+//   opacity: 0.8;
+
+//   padding-bottom: 10px;
+//   margin-bottom: 30px;
+//   border-bottom: 1.5px solid rgba(128, 128, 128, 0.253);
+// }
+// .videos__latestVideos {
+//   display: grid;
+//   grid-template-columns: repeat(4, minmax(0, 1fr));
+//   grid-gap: 20px;
+//   row-gap: 20px;
+//   width: 100%;
+//   margin-bottom: 70px;
+//   .videoBlock {
+//     .videoBlock__title {
+//       font-weight: 500;
+//     }
+//   }
+// }
+// .videos__commentsSorted {
+//   display: grid;
+//   grid-template-columns: repeat(12, 1fr);
+//   grid-gap: 20px;
+//   row-gap: 50px;
+//   width: 325;
+//   margin-bottom: 70px;
+
+//   .videoBlock:nth-child(1),
+//   .videoBlock:nth-child(2) {
+//     grid-column: span 3;
+
+//     .videoBlock__content-box {
+//       .videoBlock__avatar {
+//         img {
+//           width: 40px;
+//           height: 40px;
+//         }
+//       }
+//     }
+//     .videoBlock__text-box {
+//       .videoBlock__title {
+//         font-size: 21px;
+//       }
+//       .videoBlock__name {
+//         font-size: 15px;
+//       }
+//     }
+//     .vidoeBlock__views {
+//       font-size: 13px;
+//     }
+//   }
+//   .videoBlock {
+//     grid-column: span 3;
+
+//     .videoBlock__content-box {
+//       .videoBlock__avatar {
+//         img {
+//           width: 25px;
+//           height: 25px;
+//         }
+//       }
+//     }
+//   }
+//   // .videoBlock:first-child,
+//   // .videoBlock:nth-child(2) {
+//   //   grid-column: span 3; // 6개 열중에서, 앞에 2개 비디오가 열 3개씩 먹고
+//   // }
+//   // .videoBlock:nth-child(3),
+//   // .videoBlock:nth-child(4),
+//   // .videoBlock:nth-child(5) {
+//   //   grid-column: span 2; // 뒤에 3개 비디오가 6개 열중에서 각각 2개열씩 먹는다
+//   // }
+// }
+
+// .videos__viewsSorted {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   grid-gap: 30px;
+//   row-gap: 50px;
+//   width: 100%;
+//   .videoBlock {
+//     .videoBlock__content-box {
+//       .videoBlock__avatar {
+//         img {
+//           width: 35px;
+//           height: 35px;
+//         }
+//       }
+//     }
+//   }
+// }

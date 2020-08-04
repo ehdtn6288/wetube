@@ -275,3 +275,54 @@
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .video-Detail__container {
+    .video__comments {
+      .video__comment-list {
+        li {
+          .comment-box {
+            grid-template-columns: 34px 5fr 1fr 2fr;
+
+            a {
+              align-self: start;
+              .comment-user__avatar {
+                width: 30px;
+                height: 30px;
+                border-radius: 10px;
+              }
+            }
+            .comment__date-box {
+              font-size: 0.5em;
+              padding-top: 3px;
+              span:last-child {
+                width: 200px;
+                top: -13px;
+                right: -25px;
+                font-size: 0.3em;
+              }
+            }
+            .comment__contnet-box {
+              padding-left: 5px;
+              padding-top: 3px;
+              .comment-user__name {
+                font-size: 0.6em;
+              }
+              .comment__text {
+                font-size: 0.6em;
+              }
+            }
+            .comment__option-box {
+              .comment__subComment-btn {
+                font-size: 0.5em;
+                margin-right: 17px;
+              }
+              .comment__delete-btn {
+                font-size: 0.5em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,8 +7,8 @@ header.header
         
         .header__column
             form(action=routes.search, method ="get",id="form")
-                input(type="text" placeholder = "Search by term...", name="term")
-                button.search__button
+                input(type="text" placeholder = "Search by term...", name="term")#headerSearchInput
+                button.search__button#searchBtn
                     <i class="fas fa-search"></i>
                 
 
@@ -34,4 +34,31 @@ header.header
                         a(href=routes.me) Profile
                     li
                         a(href=routes.logout) Logout
+            
+            .hamburger-menu
+                i.fas.fa-bars.menu-icon#headerMenu
+                .bg-wrap#bgWrap
+                .hamburger-menu__options#headerOptions                    
+                    .hamburger-menu__exit
+                        i.fas.fa-times#headerMenuExit
+                        a(href=routes.home)
+                            i.fab.fa-youtube 
+                            span.header__column--title WeTube
+                    ul.hamburger-menu__nav
+                        if !loggedUser
+                            li 
+                                a(href=routes.join) Join
+                            li
+                                a(href=routes.login) Log In
+                        else    
+                            li
+                                a(href=`/videos${routes.upload}`) Upload
+                            li
+                                a(href=routes.me) Profile
+                            li
+                                a(href=routes.logout) Logout
+                        .hamburger-menu__footer
+                            .footer__icon
+                                i.fab.fa-youtube                        
+                            span.footer__text &copy; #{new Date().getFullYear()} #{siteName}
 .header__space

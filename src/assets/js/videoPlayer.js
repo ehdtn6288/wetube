@@ -56,13 +56,13 @@ function goFullscreen() {
 function handleDuration() {
   const videoDuration = videoPlayer.duration;
   videoTotalTime.innerHTML = formatData(videoDuration);
-  videoPlayRange.max = Math.floor(videoDuration);
+  videoPlayRange.max = Math.floor(videoDuration) - 0.5;
   setInterval(getCurrentTime, 500); //시간 표시 단위를 짧게 해서, 영상이 끝나도 현재시간이 1초 작게 나오는것을 방지
 }
 function getCurrentTime() {
   if (!videoPlayer.paused) {
     videoCurrentTime.innerHTML = formatData(
-      Math.floor(videoPlayer.currentTime)
+      Math.round(videoPlayer.currentTime)
     );
     // console.log("표시 시간 : " + Math.floor(videoPlayer.currentTime));
   }

@@ -84,17 +84,34 @@
       width: 100%;
 
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(12, 1fr);
       grid-gap: 30px;
+      .videoBlock {
+        width: 100%;
+        grid-column: span 4;
+      }
+    }
+  }
+}
+@media screen and (max-width: 850px) {
+  .user-profile {
+    .user-porfile__title {
+      width: 60%;
 
-      // .videoBlock {
-      //   width: 100%;
-      //   padding: 10px;
-      //   video {
-      //     width: 100%;
-      //     height: 230px;
-      //   }
-      // }
+      font-size: 1.7em;
+    }
+    .user-profile__videos {
+      .videos-title {
+        width: 60%;
+
+        font-size: 1.7em;
+      }
+      .videos-container {
+        .videoBlock {
+          width: 100%;
+          grid-column: span 12;
+        }
+      }
     }
   }
 }

@@ -1,22 +1,35 @@
 mixin videoBlock(video={})
     .videoBlock
-        span.videoBlock__duration #{video.duration}
         a.videoBlock__video-box(href=routes.videoDetail(video.id))  
             video.videoBlock__thumnail#videoBlockThumnail(src=video.fileUrl)
         .videoBlock__info
-            .videoBlock__content-box
-                a.videoBlock__avatar(href=routes.userDetail(video.creatorId))
-                    img(src=video.avatarUrl)
-            .videoBlock__text-box 
+            .videoBlock__title-box 
                 a.videoBlock__title(href=routes.videoDetail(video.id))
                     span=video.title
-                a.videoBlock__name(href=routes.userDetail(video.creatorId))
-                    span=video.creatorName
-            a.vidoeBlock__views(href=routes.videoDetail(video.id))
-                    span 조회수 #{video.views}회
-                    
-            span.dateDif #{video.createdAt}
-        
-           
+                span.dateDif #{video.createdAt}
+                span.videoBlock__duration #{video.duration}
+            .videoBlock__meta-box
+                .videoBlock__creator-box
+                    a.videoBlock__avatar(href=routes.userDetail(video.creatorId))
+                        img(src=video.avatarUrl)
+                    a.videoBlock__name(href=routes.userDetail(video.creatorId))
+                        span #{video.creatorName} 
+                    span.seperator &nbsp;•&nbsp;
+                    a.vidoeBlock__views(href=routes.videoDetail(video.id))
+                        span.views #{video.views} views
+                .videoBlock__meta
+                    a(href=routes.videoDetail(video.id))
+                        span.videoBlock__comments
+                            i.far.fa-comment-dots &nbsp;
+                            span.comments_num #{video.totalComments}
+                .videoBlock__description
+                    a(href=routes.videoDetail(video.id))
+                        span #{video.description} 
 
+                
+                    
+                        
             
+            
+
+                

@@ -61,7 +61,7 @@ const addComment = (
     .split(" ")
     .slice(3, 5);
   date.innerHTML = formatDate(commentDate);
-  time.innerHTML = `${formatDate2(commentDate)[0]} \ ${
+  time.innerHTML = `${formatDate2(commentDate)[0]}  \  ${
     formatDate2(commentDate)[1]
   }`; // 역슬레쉬는 줄바꿈!!
 
@@ -174,6 +174,7 @@ const formatDate = (date) => {
     return `${difSeconds}초 전`;
   }
 };
+
 const formatDate2 = (date) => {
   const dateString = new Date(date);
   const year = dateString.getFullYear();
@@ -194,6 +195,7 @@ const formatDate2 = (date) => {
   ${ap}`;
   return [type1, type2];
 };
+
 const foldSubComment = (event) => {
   console.dir(
     event.path[3].querySelector(".subComment-box").children.length - 1
@@ -517,7 +519,7 @@ async function handleSubmit(event) {
 async function init() {
   getOriginalCommentNum(); // 시작시점의 코멘트 갯수를 가져온다.
 
-  setInterval(setCommentData, 10000); // 이걸 키면 실시간으로 댓글창의 변화를 알 수 있다.
+  // setInterval(setCommentData, 10000); // 이걸 키면 실시간으로 댓글창의 변화를 알 수 있다.
   // removeComment();
   addCommentForm.addEventListener("submit", handleSubmit);
 }
