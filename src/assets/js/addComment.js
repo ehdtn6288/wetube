@@ -113,7 +113,7 @@ const addComment = (
     delBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
     delBtn.classList.add("comment__delete-btn");
     optionBox.appendChild(delBtn);
-    delBtn.addEventListener("click", handleDelete);
+    delBtn.addEventListener(clickEvent, handleDelete);
   }
   if (videoCreatorId === commentCreatorId) {
     li.style.backgroundColor = "rgba(189, 53, 53, 0.042)";
@@ -121,6 +121,10 @@ const addComment = (
   li.appendChild(commentBox);
 };
 
+let clickEvent = (function () {
+  if ("ontouchstart" in document.documentElement === true) return "touchstart";
+  else return "click";
+})();
 // 업로드 한지 시간이 얼마나 흘렀는지 알려주는 함수
 const formatDate = (date) => {
   let difMilliSeconds = Date.now() - new Date(date);
@@ -206,8 +210,8 @@ const foldSubComment = (event) => {
     event.path[3].querySelector(".subComment-box").children.length - 1; //addComment 함수에서 넘겨주자!
   event.path[3].querySelector(".subComment-box").remove();
 
-  event.target.removeEventListener("click", foldSubComment);
-  event.target.addEventListener("click", handleSubComment);
+  event.target.removeEventListener(clickEvent, foldSubComment);
+  event.target.addEventListener(clickEvent, handleSubComment);
   event.target.innerHTML = `답글 ${
     numberOfSubComments == 0 ? "달기" : numberOfSubComments + "개"
   }`;
@@ -349,7 +353,7 @@ const postSubComment = async (event) => {
 const handleDelete = async (event) => {
   // console.log(event.path[2].children[1].innerHTML);
   // console.log(event.path[1].className.split(" ")[0]); //자르고 붙여서 클래스에 등록된 코멘트 id 값을 가져온다.
-  const thisSubNum = parseInt(event.path[2].children[1].innerHTML);
+  // const thisSubNum = parseInt(event.path[2].children[1].innerHTML);
   event.path[4].remove();
   const commentId = event.path[1].className.split(" ")[0];
   // decreaseCommentNum(thisSubNum);
@@ -387,7 +391,8 @@ const handleDelete = async (event) => {
 
 const removeComment = async (commentId) => {
   const videoId = window.location.href.split("/videos/")[1];
-  const response = await axios({
+  console.log(typeof videoId);
+  await axios({
     url: `/api/${videoId}/comments`,
     method: "DELETE",
     data: {
