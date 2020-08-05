@@ -57,7 +57,7 @@ block content
 
                   ul.video__comment-list#jsCommentList
                         if !loggedUser
-                              each comment in video.comments.reverse()
+                              each comment in video.comments
                                     li    
                                           .comment-box
                                                 a(href=routes.userDetail(comment.creator.id))

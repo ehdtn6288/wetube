@@ -1,6 +1,6 @@
 mixin videoPlayer(video={})
     .videoPlayer#jsVideoContainer
-        video(src=video.src,autoplay="" muted="" loop="" playsinline="")#jsVideoPlayer
+        video(src=video.src)#jsVideoPlayer
         .videoPlayer__controls
             .videoPlayer__column
                 .videoPlayer-playRange
