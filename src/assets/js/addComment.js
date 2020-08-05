@@ -5,11 +5,11 @@ const commentsList = document.getElementById("jsCommentList");
 const commentNum = document.getElementById("jsCommentNum");
 const commentAvatar = document.getElementById("jsCommentAvatar");
 
-function decreaseCommentNum(thisSubNum) {
-  console.log(thisSubNum);
-  commentNum.innerHTML = parseInt(commentNum.innerHTML) - thisSubNum - 1; //subComment - 자기자신도 1개 빼야 되므로
-  originalCommentNum -= 1;
-}
+// function decreaseCommentNum(thisSubNum) {
+//   console.log(thisSubNum);
+//   commentNum.innerHTML = parseInt(commentNum.innerHTML) - thisSubNum - 1; //subComment - 자기자신도 1개 빼야 되므로
+//   originalCommentNum -= 1;
+// }
 
 const addComment = (
   commentText,
