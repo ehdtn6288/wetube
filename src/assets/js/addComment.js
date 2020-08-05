@@ -40,7 +40,9 @@ const addComment = (
 
   avatar.src = userAvatar;
   avatar.classList.add("comment-user__avatar");
-  imgLink.href = `http://localhost:4000/users/${commentCreatorId}`;
+  imgLink.href = `${
+    window.location.href.split("videos")[0]
+  }users/${commentCreatorId}`; // 배포하면 localhost:4000이 아닌 도메인 주소를 가지므로, 홈페이지 메인 도메인 주소를 뽑아서, 뒤에다 users/:id 값을 붙여줘야 한다.
   imgLink.appendChild(avatar);
   commentBox.appendChild(imgLink);
 

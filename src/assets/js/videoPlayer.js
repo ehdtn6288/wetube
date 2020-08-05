@@ -56,10 +56,13 @@ function goFullscreen() {
 }
 async function handleDuration() {
   const blob = await fetch(videoPlayer.src).then((response) => response.blob());
+  // const reader = new FileReader();
+
+  // console.log(reader.readAsDataURL(videoPlayer.src.blob));
   const durtaion = await getBlobDuration(blob); //blob 파일 비디오 재생시간 오류 해결
   const videoDuration = videoPlayer.duration;
-  videoTotalTime.innerHTML = formatData(durtaion);
-  videoPlayRange.max = Math.floor(durtaion) - 0.5;
+  videoTotalTime.innerHTML = formatData(videoDuration);
+  videoPlayRange.max = Math.floor(videoDuration) - 0.5;
   setInterval(getCurrentTime, 500); //시간 표시 단위를 짧게 해서, 영상이 끝나도 현재시간이 1초 작게 나오는것을 방지
 }
 function getCurrentTime() {
