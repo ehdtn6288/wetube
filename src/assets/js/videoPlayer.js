@@ -54,12 +54,11 @@ function goFullscreen() {
   videoFullBtn.addEventListener("click", exitFullscreen);
   // console.log(videoPlayer);
 }
-async function handleDuration() {
+function handleDuration() {
   // const blob = await fetch(videoPlayer.src).then((response) => response.blob());
   // const reader = new FileReader();
-
   // console.log(reader.readAsDataURL(videoPlayer.src.blob));
-  const durtaion = await getBlobDuration(blob); //blob 파일 비디오 재생시간 오류 해결
+  // const durtaion = await getBlobDuration(blob); //blob 파일 비디오 재생시간 오류 해결
   const videoDuration = videoPlayer.duration;
   videoTotalTime.innerHTML = formatData(videoDuration);
   videoPlayRange.max = Math.floor(videoDuration) - 0.5;
