@@ -204,11 +204,12 @@ const formatDate2 = (date) => {
 
 const foldSubComment = (event) => {
   console.dir(
-    event.path[3].querySelector(".subComment-box").children.length - 1
+    event.composedPath()[3].querySelector(".subComment-box").children.length - 1
   );
   const numberOfSubComments =
-    event.path[3].querySelector(".subComment-box").children.length - 1; //addComment 함수에서 넘겨주자!
-  event.path[3].querySelector(".subComment-box").remove();
+    event.composedPath()[3].querySelector(".subComment-box").children.length -
+    1; //addComment 함수에서 넘겨주자!
+  event.composedPath()[3].querySelector(".subComment-box").remove();
 
   event.target.removeEventListener(clickEvent, foldSubComment);
   event.target.addEventListener(clickEvent, handleSubComment);
@@ -221,16 +222,18 @@ let originalSubCommentsNum;
 
 const handleSubComment = async (event) => {
   const subCommentBtn = event.target;
+  console.log(event.composedPath()[3]);
+  console.log(event.composedPath()[3]);
   event.target.innerHTML = "답글 접기";
-  event.path[3].style.display = "block";
+  event.composedPath()[3].style.display = "block";
   subCommentBtn.removeEventListener("click", handleSubComment);
   subCommentBtn.addEventListener("click", foldSubComment);
   // console.log(event);
-  // console.log(event.path[3]); // Commnet li 태그 --> 이 밑에 답글을 입력하는 input이 뜨게 해야됨.
-  const commentId = event.path[3].id;
-  // console.log(event.path[0].className.split(" ")[0]);
+  // console.log(event.composedPath()[3]); // Commnet li 태그 --> 이 밑에 답글을 입력하는 input이 뜨게 해야됨.
+  const commentId = event.composedPath()[3].id;
+  // console.log(event.composedPath()[0].className.split(" ")[0]);
   const subCommentBox = document.createElement("div");
-  const li = event.path[3];
+  const li = event.composedPath()[3];
   const avatar = document.createElement("img");
   const form = document.createElement("form");
   const input = document.createElement("input");
@@ -298,11 +301,11 @@ const handleSubComment = async (event) => {
 let totalComments;
 const postSubComment = async (event) => {
   event.preventDefault();
-  console.log(event.path[1]);
+  console.log(event.composedPath()[1]);
   console.log(event.target[0].value);
   const subComment = event.target[0].value;
-  const commentId = event.path[2].id;
-  const subCommentBox = event.path[1];
+  const commentId = event.composedPath()[2].id;
+  const subCommentBox = event.composedPath()[1];
   await sendSubComment(commentId, subComment);
   event.target[0].value = "";
   const videoId = window.location.href.split("/videos/")[1];
@@ -351,11 +354,11 @@ const postSubComment = async (event) => {
 };
 
 const handleDelete = async (event) => {
-  // console.log(event.path[2].children[1].innerHTML);
-  // console.log(event.path[1].className.split(" ")[0]); //자르고 붙여서 클래스에 등록된 코멘트 id 값을 가져온다.
-  // const thisSubNum = parseInt(event.path[2].children[1].innerHTML);
-  event.path[4].remove();
-  const commentId = event.path[1].className.split(" ")[0];
+  // console.log(event.composedPath()[2].children[1].innerHTML);
+  // console.log(event.composedPath()[1].className.split(" ")[0]); //자르고 붙여서 클래스에 등록된 코멘트 id 값을 가져온다.
+  // const thisSubNum = parseInt(event.composedPath()[2].children[1].innerHTML);
+  event.composedPath()[4].remove();
+  const commentId = event.composedPath()[1].className.split(" ")[0];
   // decreaseCommentNum(thisSubNum);
   await removeComment(commentId);
 
