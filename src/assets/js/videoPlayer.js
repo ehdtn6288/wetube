@@ -55,7 +55,7 @@ function goFullscreen() {
   // console.log(videoPlayer);
 }
 async function handleDuration() {
-  const blob = await fetch(videoPlayer.src).then((response) => response.blob());
+  // const blob = await fetch(videoPlayer.src).then((response) => response.blob());
   // const reader = new FileReader();
 
   // console.log(reader.readAsDataURL(videoPlayer.src.blob));
