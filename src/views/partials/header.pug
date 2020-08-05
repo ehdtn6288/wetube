@@ -24,9 +24,9 @@ header.header
             ul
                 if !loggedUser
                     li 
-                        a(href=routes.join) Join
+                        a(href=routes.join) Sign In
                     li
-                        a(href=routes.login) Log In
+                        a(href=routes.login) Login
                 else    
                     li
                         a(href=`/videos${routes.upload}`) Upload
@@ -47,9 +47,9 @@ header.header
                     ul.hamburger-menu__nav
                         if !loggedUser
                             li 
-                                a(href=routes.join) Join
+                                a(href=routes.join) Sign In
                             li
-                                a(href=routes.login) Log In
+                                a(href=routes.login) Login
                         else    
                             li
                                 a(href=`/videos${routes.upload}`) Upload
