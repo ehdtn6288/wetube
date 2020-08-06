@@ -24,13 +24,14 @@
     margin-bottom: 40px;
     width: 100%;
     .comment-form {
-      display: flex;
+      display: grid;
+      grid-template-columns: 0.3fr 5fr 1fr;
       align-items: center;
       img {
         align-items: baseline;
         width: 40px;
         height: 40px;
-        border-radius: 15px;
+        border-radius: 16px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.089),
           0 3px 6px rgba(0, 0, 0, 0.349);
       }
@@ -39,11 +40,11 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.144);
         background-color: rgba(0, 0, 0, 0);
         font-size: 18px;
-        padding-left: 7px;
-        padding-bottom: 2px;
+        padding-left: 4px;
+        padding-bottom: 4px;
         font-weight: 500;
         border-radius: 0;
-        width: 55%;
+        width: 100%;
         max-width: 850px;
         transition: 0.5s ease-in-out;
         &::placeholder {
@@ -58,15 +59,16 @@
       }
       .comment-input__button {
         margin-left: 10px;
+        justify-self: end;
         width: 70px;
-        height: 35px;
-        background-color: rgba(0, 0, 0, 0.075);
+        height: 30px;
+        background-color: rgba(0, 0, 0, 0.425);
         color: white;
         box-shadow: 0 5px 7px rgba(0, 0, 0, 0.062),
           0 5px 7px rgba(0, 0, 0, 0.075);
-        transition: 0.2s linear;
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.425);
+
+        &:active {
+          background-color: rgba(0, 0, 0, 0.678);
           box-shadow: 0 5px 7px rgba(0, 0, 0, 0.205),
             0 5px 7px rgba(0, 0, 0, 0.24);
         }
@@ -102,7 +104,7 @@
           .comment-user__avatar {
             width: 47px;
             height: 47px;
-            border-radius: 15px;
+            border-radius: 19px;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.205),
               0 3px 6px rgba(0, 0, 0, 0.349);
             transition: 0.2s linear;
@@ -132,7 +134,7 @@
               display: flex;
               flex-direction: column;
               align-items: flex-end;
-              font-size: 0.5em;
+              font-size: 0.6em;
               font-weight: 600;
               opacity: 0.4;
               position: relative;
@@ -196,20 +198,20 @@
           margin-right: 10px;
           width: 35px;
           height: 35px;
-          border-radius: 10px;
+          border-radius: 14px;
           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.089),
             0 3px 6px rgba(0, 0, 0, 0.349);
         }
         .subComment__input {
           border-bottom: 1px solid rgba(0, 0, 0, 0.144);
           background-color: rgba(0, 0, 0, 0);
-
+          padding-left: 4px;
           padding-bottom: 5px;
           font-size: 0.7em;
           font-weight: 600;
           color: rgba(0, 0, 0, 0.55);
           border-radius: 0;
-          width: 55%;
+          width: 100%;
           max-width: 850px;
           transition: 0.5s ease-in-out;
           &::placeholder {
@@ -225,16 +227,16 @@
         }
         .comment-input__button {
           margin-left: 10px;
-          width: 50px;
+          width: 55px;
           height: 28px;
           font-size: 0.6em;
-          background-color: rgba(0, 0, 0, 0.075);
+          background-color: rgba(0, 0, 0, 0.425);
           color: white;
           box-shadow: 0 5px 7px rgba(0, 0, 0, 0.062),
             0 5px 7px rgba(0, 0, 0, 0.075);
-          transition: 0.2s linear;
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.425);
+
+          &:active {
+            background-color: rgba(0, 0, 0, 0.678);
             box-shadow: 0 5px 7px rgba(0, 0, 0, 0.205),
               0 5px 7px rgba(0, 0, 0, 0.24);
           }
@@ -242,7 +244,7 @@
       }
       li {
         background-color: rgba(236, 236, 236, 0);
-        border-radius: 0px;
+        border-radius: 10px;
         box-shadow: none;
         border-bottom: 1.5px solid rgba(0, 0, 0, 0.021);
         .comment-box {
@@ -255,7 +257,7 @@
             .comment-user__avatar {
               width: 35px;
               height: 35px;
-              border-radius: 10px;
+              border-radius: 14px;
               box-shadow: 0 3px 6px rgba(0, 0, 0, 0.205),
                 0 3px 6px rgba(0, 0, 0, 0.349);
               transition: 0.2s linear;
@@ -318,6 +320,26 @@
 @media screen and (max-width: 768px) {
   .video-Detail__container {
     .video__comments {
+      .comments__add {
+        .comment-form {
+          width: 100%;
+          img {
+            width: 33px;
+            height: 33px;
+            border-radius: 13px;
+          }
+          .comment-input {
+            width: 90%;
+            font-size: 1em;
+            font-weight: 400;
+          }
+          .comment-input__button {
+            width: 50px;
+            height: 28px;
+            font-size: 0.8em;
+          }
+        }
+      }
       .video__comment-list {
         li {
           .comment-box {
@@ -328,7 +350,7 @@
               .comment-user__avatar {
                 width: 30px;
                 height: 30px;
-                border-radius: 10px;
+                border-radius: 12px;
               }
             }
 
@@ -341,11 +363,11 @@
                 font-size: 0.4em;
                 .comment-user__name {
                   margin-right: 10px;
-                  font-size: 12px;
+                  font-size: 1.5em;
                   font-weight: 400;
                 }
                 .comment__date-box {
-                  font-size: 0.4em;
+                  font-size: 1.1em;
 
                   span:last-child {
                     width: 200px;
@@ -357,6 +379,7 @@
               }
               .comment__text {
                 font-size: 0.6em;
+                font-weight: 400;
               }
             }
             .comment__subComment-btn {
@@ -400,7 +423,7 @@
                 .comment-user__avatar {
                   width: 24px;
                   height: 24px;
-                  border-radius: 10px;
+                  border-radius: 9.5px;
                 }
               }
               .comment__contnet-box {
@@ -417,7 +440,7 @@
                     font-weight: 400;
                   }
                   .comment__date-box {
-                    font-size: 0.5em;
+                    font-size: 0.9em;
                     span:last-child {
                       top: -15px;
                     }
