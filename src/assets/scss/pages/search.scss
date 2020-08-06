@@ -1,6 +1,7 @@
 .search {
   .search__header {
     margin-bottom: 40px;
+
     h3 {
       font-size: 25px;
       font-weight: 500;
@@ -9,79 +10,24 @@
     }
   }
   .search__videos {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 20px;
+    row-gap: 30px;
     .videoBlock {
-      margin-bottom: 40px;
-      flex-direction: row;
+      grid-column: span 4;
       video {
-        width: 350px;
-      }
-      .videoBlock__info {
-        margin-top: 0px;
         width: 100%;
-        margin-left: 30px;
-        .dateDif {
-          font-size: 0.9em;
-        }
-        .videoBlock__duration {
-          right: initial;
-          top: initial;
-          bottom: 10px;
-          left: -89px;
-        }
-        .videoBlock__title-box {
-          .videoBlock__title {
-            font-size: 1.8em;
-          }
-        }
-        .videoBlock__description {
-          font-size: 1.2em;
-          opacity: 0.7;
-          margin-top: 15px;
-          word-break: break-all;
-          grid-column: span 2;
-        }
-        .videoBlock__comments {
-          font-size: 1em;
-        }
       }
     }
   }
 }
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1000px) {
   .search {
     .search__videos {
       .videoBlock {
+        grid-column: span 6;
         video {
-          width: 240px;
-        }
-        .videoBlock__info {
-          margin-left: 15px;
-          .videoBlock__creator-box {
-            font-size: 0.8em;
-            img {
-              width: 15px;
-              height: 15px;
-            }
-            .videoBlock__name,
-            .seperator,
-            .vidoeBlock__views {
-              padding-top: 0px;
-            }
-          }
-          .dateDif {
-            font-size: 0.8em;
-          }
-          .videoBlock__duration {
-            font-size: 10px;
-            bottom: 10px;
-            left: -62px;
-          }
-          .videoBlock__title {
-            font-size: 1.2em;
-          }
-          .videoBlock__description {
-            font-size: 1em;
-          }
         }
       }
     }
@@ -91,32 +37,8 @@
   .search {
     .search__videos {
       .videoBlock {
+        grid-column: span 12;
         video {
-          width: 140px;
-        }
-        .videoBlock__info {
-          margin-left: 14px;
-
-          .dateDif {
-            font-size: 0.3em;
-          }
-          .videoBlock__duration {
-            bottom: 8px;
-            left: -62px;
-          }
-          .videoBlock__title {
-            font-size: 1em;
-          }
-          .videoBlock__description {
-            margin-top: 5px;
-            font-size: 1em;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-          .videoBlock__comments {
-            font-size: 1em;
-          }
         }
       }
     }

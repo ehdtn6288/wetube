@@ -4,6 +4,10 @@ html
         link(rel="shortcut icon" href="#")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU", crossorigin="anonymous")
         link(rel="stylesheet", href="/static/styles.css")
+
+        link(href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet")  
+        script(src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js")
+
         meta(name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0")
         title #{pageTitle} | #{siteName}
     body
@@ -12,3 +16,4 @@ html
             block content
         include ../partials/footer
         script(src="/static/main.js")
+        script(src="https://vjs.zencdn.net/7.8.4/video.js")

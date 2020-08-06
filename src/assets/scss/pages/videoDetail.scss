@@ -7,6 +7,10 @@
   .video__player {
     width: 100%;
     max-width: 850px;
+    .my-video-dimensions {
+      width: 100%;
+      height: 478.125px;
+    }
   }
   .video__player {
     display: flex;

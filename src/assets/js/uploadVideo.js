@@ -1,8 +1,8 @@
 const videoInput = document.getElementById("file");
-const video = document.getElementById("jsVideoPlayer");
+const video = document.getElementById("my-video");
 const inputDuration = document.querySelector("input[name=duration]");
 const fileUploadContainer = document.getElementById("fileUploadContainer");
-
+const source = document.getElementById("jsVideoSource");
 const videoPlayerContainer = document.getElementById("jsVideoContainer");
 
 const setPriview = () => {
@@ -14,9 +14,13 @@ const setPriview = () => {
   const fileLabel = document.getElementById("jsUploadLabel");
   const filePreiviewContainer = document.getElementById("fileUploadContainer");
   const reader = new FileReader();
-
+  // const blobUrl = URL.createObjectURL(file);
   reader.addEventListener("loadend", function () {
-    video.src = reader.result;
+    video.src = reader.result; //일단 접어두기
+    video.type = file.type;
+    source.src = reader.result;
+    // console.log(window.atob(`${reader.result.split(",")[1]}`));
+    // console.log(video.children[0].src);
     fileName.innerHTML = "파일이름 : " + file.name;
     fileSize.innerHTML = "파일크기 : " + returnFileSize(file.size);
     fileType.innerHTML = "파일타입 : " + file.type;
