@@ -58,6 +58,7 @@ button {
 }
 button,
 input[type="submit"] {
+  -webkit-appearance: none;
   cursor: pointer;
 }
 a,

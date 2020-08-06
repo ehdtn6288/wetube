@@ -25,15 +25,17 @@ const addComment = (
 ) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
-  const delBtn = document.createElement("span");
+  const delBox = document.createElement("span");
   const contentBox = document.createElement("div");
   const avatar = document.createElement("img");
+  const nameDateBox = document.createElement("div");
   const name = document.createElement("span");
   const dateBox = document.createElement("div");
   const date = document.createElement("span");
   const time = document.createElement("span");
   const imgLink = document.createElement("a");
   const commentBox = document.createElement("div");
+  const delIcon = document.createElement("i");
 
   //프로필 사진 이미지 태그를 a 태그안에 추가시키고, a 태그는 comment.creator.id 값을 통해 해당 유저의 프로필로 가게끔 링크(href)를 건다.
   commentBox.classList.add("comment-box");
@@ -51,7 +53,9 @@ const addComment = (
   name.classList.add("comment-user__name");
   span.classList.add("comment__text");
   contentBox.classList.add("comment__contnet-box");
-  contentBox.appendChild(name);
+  nameDateBox.className = "comment__name-date-box";
+  nameDateBox.appendChild(name);
+  contentBox.appendChild(nameDateBox);
   contentBox.appendChild(span); // li 안에 span 이 들어간 형태(노드)만 만들어 줌.
   commentBox.appendChild(contentBox);
 
@@ -70,7 +74,7 @@ const addComment = (
   dateBox.classList.add("comment__date-box");
   dateBox.appendChild(date);
   dateBox.appendChild(time);
-  commentBox.appendChild(dateBox);
+  nameDateBox.appendChild(dateBox);
 
   li.id = commentId;
   commentsList.appendChild(li); // .prepend or .append 를 통해 만들어진 노드를 삽입
@@ -100,20 +104,23 @@ const addComment = (
     subNum.style.display = "none";
 
     optionBox.classList.add("comment__option-box");
-    optionBox.appendChild(subCommentBtn);
+
     optionBox.appendChild(subNum);
 
     subCommentBtn.addEventListener("click", handleSubComment);
+    commentBox.appendChild(subCommentBtn);
     commentBox.appendChild(optionBox);
   }
 
   if (commentCreatorId === userId) {
     // 본인이 로그인 했을때만, 삭제표시 해주기
-    delBtn.className = commentId;
-    delBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
-    delBtn.classList.add("comment__delete-btn");
-    optionBox.appendChild(delBtn);
-    delBtn.addEventListener(clickEvent, handleDelete);
+    // delBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+    delIcon.id = commentId;
+    delIcon.addEventListener("click", handleDelete);
+    delIcon.className = "fas fa-trash-alt";
+    delBox.appendChild(delIcon);
+    delBox.classList.add("comment__delete-box");
+    optionBox.appendChild(delBox);
   }
   if (videoCreatorId === commentCreatorId) {
     li.style.backgroundColor = "rgba(189, 53, 53, 0.042)";
@@ -121,7 +128,7 @@ const addComment = (
   li.appendChild(commentBox);
 };
 
-let clickEvent = (function () {
+let touchEvent = (function () {
   if ("ontouchstart" in document.documentElement === true) return "touchstart";
   else return "click";
 })();
@@ -211,8 +218,8 @@ const foldSubComment = (event) => {
     1; //addComment 함수에서 넘겨주자!
   event.composedPath()[3].querySelector(".subComment-box").remove();
 
-  event.target.removeEventListener(clickEvent, foldSubComment);
-  event.target.addEventListener(clickEvent, handleSubComment);
+  event.target.removeEventListener("click", foldSubComment);
+  event.target.addEventListener("click", handleSubComment);
   event.target.innerHTML = `답글 ${
     numberOfSubComments == 0 ? "달기" : numberOfSubComments + "개"
   }`;
@@ -222,18 +229,18 @@ let originalSubCommentsNum;
 
 const handleSubComment = async (event) => {
   const subCommentBtn = event.target;
-  console.log(event.composedPath()[3]);
-  console.log(event.composedPath()[3]);
+  console.log(event.composedPath()[2]);
+  console.log(event.composedPath()[2]);
   event.target.innerHTML = "답글 접기";
-  event.composedPath()[3].style.display = "block";
+  event.composedPath()[2].style.display = "block";
   subCommentBtn.removeEventListener("click", handleSubComment);
   subCommentBtn.addEventListener("click", foldSubComment);
   // console.log(event);
   // console.log(event.composedPath()[3]); // Commnet li 태그 --> 이 밑에 답글을 입력하는 input이 뜨게 해야됨.
-  const commentId = event.composedPath()[3].id;
+  const commentId = event.composedPath()[2].id;
   // console.log(event.composedPath()[0].className.split(" ")[0]);
   const subCommentBox = document.createElement("div");
-  const li = event.composedPath()[3];
+  const li = event.composedPath()[2];
   const avatar = document.createElement("img");
   const form = document.createElement("form");
   const input = document.createElement("input");
@@ -357,30 +364,36 @@ const handleDelete = async (event) => {
   // console.log(event.composedPath()[2].children[1].innerHTML);
   // console.log(event.composedPath()[1].className.split(" ")[0]); //자르고 붙여서 클래스에 등록된 코멘트 id 값을 가져온다.
   // const thisSubNum = parseInt(event.composedPath()[2].children[1].innerHTML);
-  event.composedPath()[4].remove();
-  const commentId = event.composedPath()[1].className.split(" ")[0];
-  // decreaseCommentNum(thisSubNum);
-  await removeComment(commentId);
+  try {
+    event.composedPath()[4].remove();
 
-  const videoId = window.location.href.split("/videos/")[1];
-  const response = await axios.get(`/api/${videoId}/comments`);
-  const comments = response.data.video.comments;
-  const VideoSubComments = response.data.video.subComments;
-  const videoAllComments = comments.concat(VideoSubComments);
-  totalComments = videoAllComments.length;
-  console.log(totalComments, originalCommentNum);
-  // for (var i = 0; i < videoAllComments.length; i++) {
-  //   if (videoAllComments[i]._id == commentId) {
-  //     videoAllComments[i];
-  //   }
-  // }
-  if (originalCommentNum != comments.length) {
-    originalCommentNum -= 1;
+    const commentId = event.target.id;
+    console.log(event.composedPath());
+    // decreaseCommentNum(thisSubNum);
+    await removeComment(commentId);
+
+    const videoId = window.location.href.split("/videos/")[1];
+    const response = await axios.get(`/api/${videoId}/comments`);
+    const comments = response.data.video.comments;
+    const VideoSubComments = response.data.video.subComments;
+    const videoAllComments = comments.concat(VideoSubComments);
+    totalComments = videoAllComments.length;
+    console.log(totalComments, originalCommentNum);
+    // for (var i = 0; i < videoAllComments.length; i++) {
+    //   if (videoAllComments[i]._id == commentId) {
+    //     videoAllComments[i];
+    //   }
+    // }
+    if (originalCommentNum != comments.length) {
+      originalCommentNum -= 1;
+    }
+    if (originalSubCommentsNum != VideoSubComments.length) {
+      originalSubCommentsNum -= 1;
+    }
+    setCommentNum(totalComments); //커맨트 개수 표현}
+  } catch (error) {
+    console.log(error);
   }
-  if (originalSubCommentsNum != VideoSubComments.length) {
-    originalSubCommentsNum -= 1;
-  }
-  setCommentNum(totalComments); //커맨트 개수 표현
 };
 
 // const deleteComment = () => {

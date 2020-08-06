@@ -247,7 +247,7 @@ export const deleteComment = async (req, res) => {
     params: { id },
   } = req;
   try {
-    await Comment.findOneAndDelete({ _id: commentId });
+    await Comment.findOneAndRemove({ _id: commentId });
     const subComments = await Comment.find({ comment: commentId });
     await Comment.find({ comment: commentId }).remove();
 
