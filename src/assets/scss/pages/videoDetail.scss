@@ -7,8 +7,11 @@
   .video__player {
     width: 100%;
     max-width: 850px;
-    .videoPlayer video {
-      // max-height: 500px;
+    height: 478.125px;
+    .videoPlayer {
+      .video-js {
+        height: 478.125px;
+      }
     }
 
     .my-video-dimensions {
@@ -101,6 +104,21 @@
       margin-bottom: 20px;
       padding-left: 50px;
       word-break: break-all;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .video-Detail__container {
+    .video__player {
+      height: 300px;
+      .videoPlayer {
+        position: absolute;
+
+        .video-js {
+          height: 300px;
+          box-shadow: none;
+        }
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 mixin videoBlock(video={})
     .videoBlock
         a.videoBlock__video-box(href=routes.videoDetail(video.id))  
-            video(id="my-video" class="video-js vjs-big-play-centered" playsinline  preload="auto")            
+            video(id="my-video" class="video-js vjs-big-play-centered" playsinline poster="" preload="auto")            
                 source(src=video.fileUrl type = "video/mp4")
               
             //- video.videoBlock__thumnail#videoBlockThumnail(src=video.fileUrl)

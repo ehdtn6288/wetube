@@ -19,7 +19,7 @@
       opacity: 0.5;
       font-size: 40px;
       top: 145px;
-      left: 245px;
+      left: 240px;
       position: absolute;
       transition: 0.5s linear;
       &:hover {
@@ -90,16 +90,11 @@
       width: 400px;
       .preview__label {
         cursor: pointer;
-        width: 180px;
+
         opacity: 0.5;
         font-size: 2em;
         top: 75px;
-        left: 127px;
-        position: absolute;
-        transition: 0.5s linear;
-        &:hover {
-          opacity: 1;
-        }
+        left: 121px;
       }
     }
   }
