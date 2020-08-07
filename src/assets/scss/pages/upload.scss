@@ -1,12 +1,14 @@
 .form-container {
+  max-width: 720px;
+  margin: 0 auto;
   .fileUpload__preview {
-    width: 720px;
+    width: 100%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.281),
       0 10px 20px rgba(0, 0, 0, 0.192);
     margin-bottom: 30px;
     position: relative;
     .videoPlayer {
-      .my-video-dimensions {
+      .video-js {
         width: 100%;
         height: 412px;
       }
@@ -87,14 +89,23 @@
 @media screen and (max-width: 768px) {
   .form-container {
     .fileUpload__preview {
-      width: 400px;
+      widows: 100%;
+      .videoPlayer {
+        height: 330px;
+        .video-js {
+          width: 100%;
+          height: 330px;
+        }
+      }
       .preview__label {
         cursor: pointer;
-
+        width: 150px;
         opacity: 0.5;
-        font-size: 2em;
-        top: 75px;
-        left: 121px;
+        font-size: 1.5em;
+        top: 40%;
+        bottom: 40%;
+        left: 34%;
+        right: 34%;
       }
     }
   }

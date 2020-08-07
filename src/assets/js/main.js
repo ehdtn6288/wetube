@@ -4,3 +4,4 @@ import "./addComment";
 import "./uploadVideo";
 import "./home";
 import "./header";
+import "./videoJs";

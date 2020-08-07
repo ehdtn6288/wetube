@@ -18,7 +18,7 @@ const setPriview = () => {
   reader.addEventListener("loadend", function () {
     video.src = reader.result; //일단 접어두기
     video.type = file.type;
-    source.src = reader.result;
+    // source.src = reader.result;
     // console.log(window.atob(`${reader.result.split(",")[1]}`));
     // console.log(video.children[0].src);
     fileName.innerHTML = "파일이름 : " + file.name;
@@ -27,10 +27,10 @@ const setPriview = () => {
 
     videoPlayerContainer.style.transition = "1s linear";
     filePreiviewContainer.style.boxShadow = "none";
+    fileLabel.style.display = "none";
     requestAnimationFrame(() =>
       setTimeout(() => {
         videoPlayerContainer.style.opacity = 1;
-        fileLabel.style.opacity = 0;
       })
     );
   });
@@ -48,7 +48,7 @@ const setPriview = () => {
     requestAnimationFrame(() =>
       setTimeout(() => {
         videoPlayerContainer.style.opacity = 0;
-        fileLabel.style.opacity = 1;
+        fileLabel.style.display = "block";
         filePreiviewContainer.style.boxShadow = `0 10px 20px rgba(0, 0, 0, 0.281),
         0 10px 20px rgba(0, 0, 0, 0.192)`;
       })

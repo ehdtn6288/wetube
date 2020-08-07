@@ -155,25 +155,28 @@
     .videos__title {
       padding: 10px 20px;
     }
-    .videoBlock {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.144);
-      padding-bottom: 25px;
-      .videoBlock__info {
-        margin-top: 20px;
-        .videoBlock__duration {
-          right: 5px;
-          top: -48px;
-          opacity: 1;
+    .home-videos,
+    .search {
+      .videoBlock {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.144);
+        padding-bottom: 25px;
+        .videoBlock__info {
+          margin-top: 20px;
+          .videoBlock__duration {
+            right: 5px;
+            top: -48px;
+            opacity: 1;
+          }
+        }
+
+        .videoBlock__info {
+          padding: 0 15px;
         }
       }
 
-      .videoBlock__info {
-        padding: 0 15px;
+      .video-Detail__container {
+        padding: 0px 20px;
       }
-    }
-
-    .video-Detail__container {
-      padding: 0px 20px;
     }
   }
 }
