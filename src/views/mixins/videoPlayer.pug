@@ -1,6 +1,6 @@
 mixin videoPlayer(video={})
     .videoPlayer#jsVideoContainer
-        video(id="my-video" class="video-js vjs-big-play-centered" playsinline controls data-setup="{}" preload="auto")   
+        video(id="my-video" class="video-js vjs-big-play-centered" playsinline controls  preload="auto")   
             source(src=video.src type="video/mp4")#jsVideoSource
             source(src=video.src type="video/webm")
             source(src=video.src type="video/ogg")
