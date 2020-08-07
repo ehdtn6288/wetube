@@ -155,8 +155,13 @@
     .videos__title {
       padding: 10px 20px;
     }
+    .user-porfile__title,
+    .videos-title {
+      padding: 15px 20px;
+    }
     .home-videos,
-    .search {
+    .search,
+    .user-profile {
       .videoBlock {
         border-bottom: 1px solid rgba(0, 0, 0, 0.144);
         padding-bottom: 25px;

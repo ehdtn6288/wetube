@@ -1,6 +1,6 @@
 // import getBlobDuration from "get-blob-duration";
-// const videoContainer = document.getElementById("jsVideoContainer");
-// const videoPlayer = document.getElementById("jsVideoPlayer");
+const videoContainer = document.getElementById("jsVideoContainer");
+const videoPlayer = document.getElementById("my-video");
 // const videoPlayBtn = document.getElementById("jsVideoPlayBtn");
 // const videoPlayRange = document.getElementById("jsVideoPlayRange");
 // const videoVolumeBtn = document.getElementById("jsVideoVolumeBtn");
@@ -9,12 +9,12 @@
 // const videoCurrentTime = document.getElementById("currentTime");
 // const videoTotalTime = document.getElementById("totalTime");
 
-// function increaseViews() {
-//   const videoId = window.location.href.split("/videos/")[1];
-//   fetch(`/api/${videoId}/views`, { method: "POST" });
-//   const videoViews = document.getElementById("jsVideoViews");
-//   videoViews.innerHTML = parseInt(videoViews.innerHTML) + 1;
-// }
+function increaseViews() {
+  const videoId = window.location.href.split("/videos/")[1];
+  fetch(`/api/${videoId}/views`, { method: "POST" });
+  const videoViews = document.getElementById("jsVideoViews");
+  videoViews.innerHTML = parseInt(videoViews.innerHTML) + 1;
+}
 
 // function handlePlayPause() {
 //   if (videoPlayer.paused) {
@@ -37,10 +37,10 @@
 //     videoVolumeRange.value = 0;
 //   }
 // }
-// function handleEnded() {
-//   videoPlayBtn.innerHTML = `<i class = "fas fa-play"></i>`;
-//   increaseViews();
-// }
+function handleEnded() {
+  //   videoPlayBtn.innerHTML = `<i class = "fas fa-play"></i>`;
+  increaseViews();
+}
 // function exitFullscreen() {
 //   document.exitFullscreen();
 //   videoFullBtn.innerHTML = `<i class="fas fa-expand"></i>`;
@@ -123,22 +123,23 @@
 // const getVideoDuration = () => {
 //   videoPlayer.addEventListener("loadedmetadata", handleDuration);
 // };
-// function init() {
-//   videoPlayRange.value = 0;
-//   videoPlayRange.step = 0.01;
-//   videoPlayer.volume = 0.5; //초기 비디오 오디오 값을 설정해 준다.
+function init() {
+  //   videoPlayRange.value = 0;
+  //   videoPlayRange.step = 0.01;
+  //   videoPlayer.volume = 0.5; //초기 비디오 오디오 값을 설정해 준다.
 
-//   setInterval(setCurrentRange, 50);
+  //   setInterval(setCurrentRange, 50);
 
-//   videoPlayBtn.addEventListener("click", handlePlayPause);
-//   videoVolumeBtn.addEventListener("click", handleMute);
-//   videoFullBtn.addEventListener("click", goFullscreen);
-//   videoPlayer.load(getVideoDuration()); // loadeddata 이벤트가 호출되지 않는 문제 발생!! 그래서, 비디오가 로드 되면 함수로써 이벤트 리스너 실행하도록 설정.
-//   videoPlayer.addEventListener("ended", handleEnded);
-//   videoVolumeRange.addEventListener("input", handleVolume);
-//   videoPlayRange.addEventListener("input", handlePlay);
-// }
+  //   videoPlayBtn.addEventListener("click", handlePlayPause);
+  //   videoVolumeBtn.addEventListener("click", handleMute);
+  //   videoFullBtn.addEventListener("click", goFullscreen);
+  //   videoPlayer.load(getVideoDuration()); // loadeddata 이벤트가 호출되지 않는 문제 발생!! 그래서, 비디오가 로드 되면 함수로써 이벤트 리스너 실행하도록 설정.
+  videoPlayer.addEventListener("ended", handleEnded);
+  //   videoVolumeRange.addEventListener("input", handleVolume);
+  //   videoPlayRange.addEventListener("input", handlePlay);
+}
 
-// if (videoContainer) {
-//   init();
-// }
+if (videoContainer) {
+  console.log(videoContainer);
+  init();
+}
