@@ -1,6 +1,11 @@
 import express from "express";
 import routes from "../routes";
-import { home, search } from "../controller/videoController";
+import {
+  home,
+  search,
+  home_views,
+  home_comments,
+} from "../controller/videoController";
 
 import {
   logout,
@@ -17,6 +22,8 @@ import passport from "passport";
 const globalRouter = express.Router();
 
 globalRouter.get(routes.home, home);
+globalRouter.get(routes.rangeViews, home_views);
+globalRouter.get(routes.rangeComments, home_comments);
 globalRouter.get(routes.search, search);
 
 //join

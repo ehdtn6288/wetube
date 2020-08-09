@@ -5,3 +5,4 @@ import "./uploadVideo";
 import "./home";
 import "./header";
 import "./videoJs";
+import "./videoBlock";

@@ -1,6 +1,8 @@
 // Global
 
 const HOME = "/";
+const RNAGE_VIEWS = "/range-views";
+const RANGE_COMMENTS = "/range-comments";
 const JOIN = "/join";
 const LOGIN = "/login";
 const LOGOUT = "/logout";
@@ -29,6 +31,7 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 
 //Api
 const API = "/api";
+const HOME_RANGE = "/:id/homeRange";
 const INCREASE_VIEWS = "/:id/views";
 const ADD_COMMENTS = "/:id/comments";
 const ADD_SUB_COMMENT = "/:id/subComments";
@@ -36,6 +39,8 @@ const ADD_SUB_COMMENT = "/:id/subComments";
 //Object
 const routes = {
   home: HOME,
+  rangeViews: RNAGE_VIEWS,
+  rangeComments: RANGE_COMMENTS,
   join: JOIN,
   login: LOGIN,
   logout: LOGOUT,
@@ -89,6 +94,7 @@ const routes = {
       COMMENT_PROFILE;
     }
   },
+  homeRange: HOME_RANGE,
 };
 
 export default routes;

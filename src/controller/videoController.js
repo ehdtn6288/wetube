@@ -2,6 +2,40 @@ import routes from "../routes";
 import Video from "../models/video";
 import Comment from "../models/comment";
 
+// export const getHomeRange = async (req, res) => {
+//   const {
+//     params: { id },
+//   } = req;
+//   try {
+//     const video = await Video.find({})
+//       .sort({ _id: -1 })
+//       .populate("creator")
+//       .populate("comments");
+
+//     const videos_view_sorted = await Video.find({})
+//       .sort({ views: -1 })
+//       .populate("creator")
+//       .populate("comments");
+
+//     const videos_totalComments_sorted = await Video.find({})
+//       .sort({ totalComments: -1 })
+//       .populate("creator")
+//       .populate("comments");
+//     const video_ranges = {
+//       latest: video,
+//       views: videos_view_sorted,
+//       comments: videos_totalComments_sorted,
+//     };
+//     console.log(video_ranges[id]);
+//     const videos = video_ranges[id];
+//     res.render("home", { videos });
+//   } catch (error) {
+//     console.log(error);
+//   } finally {
+//     res.end();
+//   }
+// };
+
 export const home = async (req, res) => {
   try {
     const videos = await Video.find({})
@@ -18,11 +52,88 @@ export const home = async (req, res) => {
       .sort({ totalComments: -1 })
       .populate("creator")
       .populate("comments");
+    const video_ranges = {
+      latest: videos,
+      views: videos_view_sorted,
+      comments: videos_totalComments_sorted,
+    };
+
     res.render("home", {
       pageTitle: "Home",
       videos,
       videos_view_sorted,
       videos_totalComments_sorted,
+      video_ranges,
+    });
+  } catch (error) {
+    console.log(error);
+    res.render("home", { pageTitle: "Home", videos: [] });
+  }
+};
+
+export const home_views = async (req, res) => {
+  try {
+    const videos = await Video.find({})
+      .sort({ _id: -1 })
+      .populate("creator")
+      .populate("comments");
+
+    const videos_view_sorted = await Video.find({})
+      .sort({ views: -1 })
+      .populate("creator")
+      .populate("comments");
+
+    const videos_totalComments_sorted = await Video.find({})
+      .sort({ totalComments: -1 })
+      .populate("creator")
+      .populate("comments");
+    const video_ranges = {
+      latest: videos,
+      views: videos_view_sorted,
+      comments: videos_totalComments_sorted,
+    };
+
+    res.render("home_views", {
+      pageTitle: "Home",
+      videos,
+      videos_view_sorted,
+      videos_totalComments_sorted,
+      video_ranges,
+    });
+  } catch (error) {
+    console.log(error);
+    res.render("home", { pageTitle: "Home", videos: [] });
+  }
+};
+
+export const home_comments = async (req, res) => {
+  try {
+    const videos = await Video.find({})
+      .sort({ _id: -1 })
+      .populate("creator")
+      .populate("comments");
+
+    const videos_view_sorted = await Video.find({})
+      .sort({ views: -1 })
+      .populate("creator")
+      .populate("comments");
+
+    const videos_totalComments_sorted = await Video.find({})
+      .sort({ totalComments: -1 })
+      .populate("creator")
+      .populate("comments");
+    const video_ranges = {
+      latest: videos,
+      views: videos_view_sorted,
+      comments: videos_totalComments_sorted,
+    };
+
+    res.render("home_comments", {
+      pageTitle: "Home",
+      videos,
+      videos_view_sorted,
+      videos_totalComments_sorted,
+      video_ranges,
     });
   } catch (error) {
     console.log(error);

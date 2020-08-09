@@ -1,26 +1,24 @@
 extends layouts/main
 include mixins/videoBlock
+
 block content
-    //- -const s = document.getElementById("range");    
-    //- -console.log(s)
     .home-videos#home
 
         .videos__title
-            span Latest
-            .select
-
+           span Latest
+           .select
                 select(name="range", id = "range", onchange="location.href=this.value")
-                    option(value="" selected) 정렬   
+                    option(value="") 정렬
                     option(value=`/`) 날짜순
                     option(value=`/range-views`) 조회수
-                    option(value=`/range-comments`) 댓글순
+                    option(value=`/range-comments` selected) 댓글순
              
         .videos__latestVideos        
-              
+            
 
             
-            //- -console.log(select);
-            each item in videos
+
+            each item in videos_totalComments_sorted
                 +videoBlock({
                     id : item.id,
                     title : item.title,
