@@ -4,7 +4,7 @@ const headerMenuExit = document.getElementById("headerMenuExit");
 const headerBgWrap = document.getElementById("bgWrap");
 const headerSearchInput = document.getElementById("headerSearchInput");
 const headerSearchBtn = document.getElementById("searchBtn");
-const responsiveWidth = window.matchMedia("screen and (max-width: 768px)");
+const responsiveWidth = window.matchMedia("(screen and (max-width: 768px))");
 
 function openMenuHandler() {
   console.log("open " + headerOptions.style.display);
@@ -63,7 +63,7 @@ function init() {
   headerMenuBtn.onclick = openMenuHandler;
   headerBgWrap.onclick = exitMenuHandler;
   headerSearchInput.onclick = handleSearchInput;
-  responsiveWidth.addEventListener("change", handleSerchResponse);
+  // responsiveWidth.addEventListener("change", handleSerchResponse);
 }
 
 if (headerMenuBtn) {

@@ -61,7 +61,7 @@ function init() {
   const blockNum = videoBlock.length;
   for (var i = 0; i < blockNum; i++) {
     dateDif[i].innerHTML = formatDate(dateDif[i].innerHTML);
-    console.log(dateDif[i].innerHTML);
+    console.log("1111" + dateDif[i].innerHTML);
   }
 }
 
