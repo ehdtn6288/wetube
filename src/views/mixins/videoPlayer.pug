@@ -1,29 +1,29 @@
 mixin videoPlayer(video={})
     .videoPlayer#jsVideoContainer
-        video(id="my-video" class="video-js vjs-big-play-centered"  playsinline controls poster="" preload="metadata")   
+        video(id="my-video" class="video-js  vjs-big-play-centered"  playsinline controls=false poster="" preload="metadata")   
             source(src=`${video.src}#t=0.0001` type="video/mp4")#jsVideoSource
             source(src=`${video.src}#t=0.0001` type="video/webm")
             source(src=`${video.src}#t=0.0001` type="video/ogg")
            
         //- video(src=video.src)#jsVideoPlayer
-        //- .videoPlayer__controls
-        //-     .videoPlayer__column
-        //-         .videoPlayer-playRange
-        //-            input#jsVideoPlayRange(type="range")
-        //-     .videoPlayer__column
-        //-         .videoPlayer-volume
-        //-             span#jsVideoVolumeBtn
-        //-                 i.fas.fa-volume-up
-        //-             input#jsVolumbRange(type="range", min="0", max="1", step="0.1", value="0.5")
-        //-         .videoPlayer-time
-        //-             span
-        //-                 span#currentTime 00:00:00 
-        //-                 span / 
-        //-                 span#totalTime 00:00:00
-        //-     .videoPlayer__column
-        //-         span#jsVideoPlayBtn
-        //-             i.fas.fa-play
-        //-     .videoPlayer__column
+        .videoPlayer__controls
+            .videoPlayer__column
+                .videoPlayer-playRange
+                   input#jsVideoPlayRange(type="range")
+            .videoPlayer__column
+                .videoPlayer-volume
+                    span#jsVideoVolumeBtn
+                        i.fas.fa-volume-up
+                    input#jsVolumbRange(type="range", min="0", max="1", step="0.1", value="0.5")
+                .videoPlayer-time
+                    span
+                        span#currentTime 00:00:00 
+                        span / 
+                        span#totalTime 00:00:00
+            .videoPlayer__column
+                span#jsVideoPlayBtn
+                    i.fas.fa-play
+            .videoPlayer__column
                 
-        //-         span#jsVideoFullscreenBtn
-        //-             i.fas.fa-expand
+                span#jsVideoFullscreenBtn
+                    i.fas.fa-expand

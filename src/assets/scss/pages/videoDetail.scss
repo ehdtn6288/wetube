@@ -10,7 +10,12 @@
     height: 478.125px;
     .videoPlayer {
       .video-js {
-        height: 478.125px;
+        width: 100%;
+        // background-color: blue;
+        // height: 478.125px;
+        video {
+          // width: 100%;
+        }
       }
     }
 
