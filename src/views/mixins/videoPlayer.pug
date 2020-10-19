@@ -6,7 +6,7 @@ mixin videoPlayer(video={})
             source(src=`${video.src}#t=0.0001` type="video/ogg")
            
         //- video(src=video.src)#jsVideoPlayer
-        .videoPlayer__controls
+        .videoPlayer__controls#jsVideoControlBox
             .videoPlayer__column
                 .videoPlayer-playRange
                    input#jsVideoPlayRange(type="range")

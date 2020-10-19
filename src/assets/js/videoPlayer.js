@@ -8,6 +8,7 @@ const videoVolumeRange = document.getElementById("jsVolumbRange");
 const videoFullBtn = document.getElementById("jsVideoFullscreenBtn");
 const videoCurrentTime = document.getElementById("currentTime");
 const videoTotalTime = document.getElementById("totalTime");
+const videoControlBox = document.getElementById("jsVideoControlBox");
 
 function increaseViews() {
   const videoId = window.location.href.split("/videos/")[1];
@@ -19,11 +20,12 @@ function increaseViews() {
 function handlePlayPause() {
   if (videoPlayer.paused) {
     videoPlayer.play();
-    videoPlayRange.value = videoPlayer.currentTime;
     videoPlayBtn.innerHTML = `<i class="fas fa-pause"></i>`;
+    videoControlBox.style.opacity = "0";
   } else {
     videoPlayer.pause();
     videoPlayBtn.innerHTML = `<i class = "fas fa-play"></i>`;
+    videoControlBox.style.opacity = "1";
   }
 }
 function handleMute() {
@@ -43,6 +45,8 @@ function handleEnded() {
 }
 function exitFullscreen() {
   document.exitFullscreen();
+  // videoPlayer.style.height = "100px";
+  // videoPlayer.style.backgroundColor = "red";
   videoFullBtn.innerHTML = `<i class="fas fa-expand"></i>`;
   videoFullBtn.removeEventListener("click", exitFullscreen);
   videoFullBtn.addEventListener("click", goFullscreen);
@@ -108,28 +112,73 @@ function handleVolume(event) {
 function handlePlay(event) {
   videoPlayer.currentTime = videoPlayRange.value;
   videoCurrentTime.innerHTML = formatData(videoPlayRange.value); // 바뀐 재생지점 표시해주기
-  console.log("range : " + videoPlayRange.value);
-  console.log("재생시간 : " + videoPlayer.currentTime);
+  // console.log("range : " + videoPlayRange.value);
+  // console.log("재생시간 : " + videoPlayer.currentTime);
 }
 function setCurrentRange() {
   if (!videoPlayer.paused) {
     videoPlayRange.value = videoPlayer.currentTime;
     // !! videoPlayRnage.value 의 값은 1단위 이며, 대입값이 소수점인 경우 반올림되어진다.
     // / 그래서 계속 rnage값이 변동하는 불상사가 생겼던것
-    console.log("현재시간 : " + videoPlayer.currentTime);
-    console.log("range : " + videoPlayRange.value);
+    // console.log("현재시간 : " + videoPlayer.currentTime);
+    // console.log("range : " + videoPlayRange.value);
   }
 }
 const getVideoDuration = () => {
   videoPlayer.addEventListener("loadedmetadata", handleDuration);
 };
+const handleControlsBox = () => {
+  videoControlBox.style.opacity = "1";
+
+  videoPlayer.addEventListener("mousemove", handleMouseHide);
+  videoPlayer.addEventListener("mouseleave", () => {
+    if (!videoPlayer.paused) {
+      videoControlBox.style.opacity = "0";
+    }
+  });
+};
+const handleControlsBox2 = () => {
+  videoControlBox.style.cursor = "default";
+  videoControlBox.style.opacity = "1";
+
+  videoControlBox.addEventListener("mouseleave", () => {
+    if (!videoPlayer.paused) {
+      videoControlBox.style.opacity = "0";
+    }
+  });
+};
+
+let hideMouse;
+const handleMouseHide = () => {
+  clearInterval(hideMouse);
+  videoPlayer.style.cursor = "default";
+  videoControlBox.style.opacity = "1";
+  videoPlayer.addEventListener("mouseleave", () => clearInterval(hideMouse));
+  if (!videoPlayer.paused) {
+    hideMouse = setInterval(() => {
+      videoPlayer.style.cursor = "none";
+      videoControlBox.style.opacity = "0";
+    }, 3000);
+  }
+};
+
+const playWithSpace = (e) => {
+  if (e.code === "Space") {
+    e.preventDefault();
+    handlePlayPause();
+  }
+};
 function init() {
-  videoPlayRange.value = 0;
+  videoPlayRange.value = videoPlayer.currentTime;
+  // videoPlayRange.value = 0;
   videoPlayRange.step = 0.01;
   videoPlayer.volume = 0.5; //초기 비디오 오디오 값을 설정해 준다.
 
   setInterval(setCurrentRange, 50);
+  videoPlayer.addEventListener("mouseover", handleControlsBox);
+  videoControlBox.addEventListener("mouseover", handleControlsBox2);
 
+  videoPlayer.addEventListener("click", handlePlayPause);
   videoPlayBtn.addEventListener("click", handlePlayPause);
   videoVolumeBtn.addEventListener("click", handleMute);
   videoFullBtn.addEventListener("click", goFullscreen);
@@ -137,6 +186,7 @@ function init() {
   videoPlayer.addEventListener("ended", handleEnded);
   videoVolumeRange.addEventListener("input", handleVolume);
   videoPlayRange.addEventListener("input", handlePlay);
+  window.addEventListener("keydown", playWithSpace);
 }
 
 if (videoContainer) {
