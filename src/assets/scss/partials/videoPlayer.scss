@@ -114,3 +114,23 @@ input[type="range"]::-webkit-slider-thumb {
   /* border: 0.1px solid #ffbe76; */
   cursor: pointer;
 }
+
+@media screen and (max-width: 550px) {
+  .videoPlayer {
+    .videoPlayer__controls {
+      bottom: 190px;
+      .videoPlayer__column {
+        .videoPlayer-volume {
+          font-size: 0.7rem;
+        }
+        .videoPlayer-time {
+          margin-left: 10px;
+          font-size: 0.8rem;
+          span {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}
