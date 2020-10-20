@@ -228,7 +228,32 @@ const hideVolumeRange = () => {
   videoVolumeRangeWrapper.style.width = `0`;
   videoVolumeBox.style.backgroundColor = "transparent";
 };
-
+const handlePcMobilePlay = () => {
+  if (clickEvent() === "touchstart") {
+    videoControlBox.style.opacity = "1";
+    console.log(clickEvent() === "touchstart");
+    videoPlayer.removeEventListener(clickEvent(), handlePcMobilePlay);
+  } else {
+    console.log(clickEvent() === "touchstart");
+    handlePlayPause();
+  }
+};
+const clickEvent = () => {
+  if ("ontouchstart" in document.documentElement === true) {
+    return "touchstart";
+  } else {
+    return "click";
+  }
+};
+const handleScreenControls = () => {
+  if (window.innerWidth > 768) {
+    videoControlBox.style.display = "flex";
+    // videoPlayer.controls = "false";
+  } else {
+    videoControlBox.style.display = "none";
+    videoPlayer.controls = "true";
+  }
+};
 function init() {
   videoPlayRange.value = videoPlayer.currentTime;
 
@@ -254,24 +279,14 @@ function init() {
   window.addEventListener("keydown", playWithSpace);
   document.addEventListener("fullscreenchange", handleVideoJsFull);
   videoPlayer.addEventListener(clickEvent(), handlePcMobilePlay);
+  // window.addEventListener("resize", handleScreenControls);
 }
-const handlePcMobilePlay = () => {
-  if (clickEvent() === "touchstart") {
-    videoContainer.style.opacity = "1";
-    console.log(clickEvent() === "touchstart");
-  } else {
-    console.log(clickEvent() === "touchstart");
-    handlePlayPause();
-  }
-};
-const clickEvent = () => {
-  if ("ontouchstart" in document.documentElement === true) {
-    return "touchstart";
-  } else {
-    return "click";
-  }
-};
 
 if (videoContainer) {
-  init();
+  if (window.innerWidth > 768) {
+    init();
+  } else {
+    videoControlBox.style.display = "none";
+    videoPlayer.controls = "true";
+  }
 }

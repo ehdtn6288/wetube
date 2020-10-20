@@ -23,7 +23,7 @@
     // grid-template-rows: 20px 40px;
     // grid-template-columns: repeat(3, 1fr);
     height: 70px;
-    background-color: rgba(0, 0, 0, 0.199);
+    background-color: rgba(0, 0, 0, 0.365);
     padding: 0 10px;
     position: absolute;
     width: 100%;
@@ -58,7 +58,7 @@
         font-size: 16px;
         display: grid;
         width: 100%;
-        grid-template-columns: 10% 32% 50% 10%;
+        grid-template-columns: 10% 31% 53% 6%;
         align-items: center;
         // justify-content: space-between;
 
@@ -96,7 +96,7 @@
         }
         .videoPlayer-playBtn {
           justify-self: left;
-          font-size: 25px;
+          font-size: 20px;
           margin-left: 15px;
         }
         .videoPlayer-expandBtn {
@@ -121,6 +121,7 @@ input[type="range"] {
 }
 input[type="range"]:focus {
   outline: none;
+  background-color: transparent;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
