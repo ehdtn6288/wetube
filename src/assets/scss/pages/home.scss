@@ -56,6 +56,9 @@
   }
 }
 @media screen and (max-width: 850px) {
+  .home-videos {
+    padding: 0 20px;
+  }
   .videos__latestVideos,
   .videos__commentsSorted,
   .videos__viewsSorted {
@@ -65,6 +68,9 @@
   }
 }
 @media screen and (max-width: 550px) {
+  .home-videos {
+    padding: 0;
+  }
   .videos__latestVideos,
   .videos__commentsSorted,
   .videos__viewsSorted {

@@ -11,19 +11,21 @@ mixin videoPlayer(video={})
                 .videoPlayer-playRange
                    input#jsVideoPlayRange(type="range")
             .videoPlayer__column
-                .videoPlayer-volume
-                    span#jsVideoVolumeBtn
-                        i.fas.fa-volume-up
-                    input#jsVolumbRange(type="range", min="0", max="1", step="0.1", value="0.5")
+                .videoPlayer-playBtn
+                    span#jsVideoPlayBtn
+                        i.fas.fa-play
                 .videoPlayer-time
                     span
                         span#currentTime 00:00:00 
-                        span / 
+                        span &nbsp  / &nbsp 
                         span#totalTime 00:00:00
-            .videoPlayer__column
-                span#jsVideoPlayBtn
-                    i.fas.fa-play
-            .videoPlayer__column
+                .videoPlayer-volume#volumeBox
+                    div.volumeRange__wrapper#jsVolumneRageWrapper
+                        input#jsVolumbRange(type="range", min="0", max="1", step="0.1", value="0.5")
+                    span#jsVideoVolumeBtn
+                        i.fas.fa-volume-up
                 
-                span#jsVideoFullscreenBtn
-                    i.fas.fa-expand
+                
+                .videoPlayer-expandBtn               
+                    span#jsVideoFullscreenBtn
+                        i.fas.fa-expand
