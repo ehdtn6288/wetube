@@ -1,3 +1,4 @@
+import getBlobDuration from "get-blob-duration";
 const videoInput = document.getElementById("file");
 const video = document.getElementById("my-video");
 const inputDuration = document.querySelector("input[name=duration]");
@@ -15,9 +16,19 @@ const setPriview = () => {
   const filePreiviewContainer = document.getElementById("fileUploadContainer");
   const reader = new FileReader();
   // const blobUrl = URL.createObjectURL(file);
-  reader.addEventListener("loadend", function () {
-    video.src = reader.result; //일단 접어두기
+  reader.addEventListener("loadend", async function () {
     video.type = file.type;
+    const blob = await fetch(reader.result).then((response) => {
+      console.log(response);
+      video.src = response.url;
+      return response.blob();
+    });
+
+    video.src = reader.result; //일단 접어두기
+    console.log(blob);
+    const duration = await getBlobDuration(blob); //blob 파일 비디오 재생시간 오류 해결
+    console.log("duration : ", duration);
+    inputDuration.value = formatData(duration);
     // source.src = reader.result;
     // console.log(window.atob(`${reader.result.split(",")[1]}`));
     // console.log(video.children[0].src);
@@ -37,6 +48,7 @@ const setPriview = () => {
 
   if (file) {
     reader.readAsDataURL(file);
+    console.log(reader);
   } else {
     video.src = "";
     inputDuration.value = "";
@@ -85,14 +97,18 @@ function formatData(seconds) {
   return `${hours}:${mins}:${totaleSeconds} `;
 }
 function setDurtaion() {
-  console.log(video.duration);
+  //  const reader = new FileReader();
+  //  console.log(reader.readAsDataURL(videoPlayer.src.blob));
+
+  console.log(video.duration, "duration");
   inputDuration.value = formatData(video.duration);
 }
 
 function init() {
   videoInput.addEventListener("change", setPriview);
   video.addEventListener("loadedmetadata", setDurtaion);
-  // videoInput.oninput = showDuration;
+  // videoInput.oninput = setDurtaion();
+  // video.load(setDurtaion());
   console.log(video);
 }
 

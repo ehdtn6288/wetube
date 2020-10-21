@@ -128,8 +128,12 @@
 //     }
 //   }
 // }
+
 @media screen and (max-width: 768px) {
   main {
+    .home-videos {
+      padding: 0 20px;
+    }
     .video-Detail__container {
       padding: 0px;
       .video__player {
@@ -168,6 +172,13 @@
           }
         }
       }
+    }
+  }
+}
+@media screen and (max-width: 550px) {
+  main {
+    .home-videos {
+      padding: 0;
     }
   }
 }

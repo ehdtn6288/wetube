@@ -37,33 +37,49 @@ import Comment from "../models/comment";
 // };
 
 export const home = async (req, res) => {
+  const {
+    query: { data: arrange_by },
+  } = req;
+  console.log(typeof arrange_by);
+  // console.log(arrange_field);
   try {
-    const videos = await Video.find({})
-      .sort({ _id: -1 })
-      .populate("creator")
-      .populate("comments");
+    let videos;
+    let title;
+    if (arrange_by === "comments") {
+      videos = await Video.find({})
+        .sort({ totalComments: -1 })
+        .populate("creator")
+        .populate("comments");
+      title = "Videos by Comments";
+    } else if (arrange_by === "views") {
+      videos = await Video.find({})
+        .sort({ views: -1 })
+        .populate("creator")
+        .populate("comments");
+      title = "Videos by Views";
+    } else if (!arrange_by) {
+      videos = await Video.find({})
+        .sort({ _id: -1 })
+        .populate("creator")
+        .populate("comments");
+      title = "Videos by Date";
+    }
 
-    const videos_view_sorted = await Video.find({})
-      .sort({ views: -1 })
-      .populate("creator")
-      .populate("comments");
+    // console.log(videos);
 
-    const videos_totalComments_sorted = await Video.find({})
-      .sort({ totalComments: -1 })
-      .populate("creator")
-      .populate("comments");
-    const video_ranges = {
-      latest: videos,
-      views: videos_view_sorted,
-      comments: videos_totalComments_sorted,
-    };
+    // const video_ranges = {
+    //   latest: videos,
+    //   views: videos_view_sorted,
+    //   comments: videos_totalComments_sorted,
+    // };
 
     res.render("home", {
       pageTitle: "Home",
       videos,
-      videos_view_sorted,
-      videos_totalComments_sorted,
-      video_ranges,
+      title,
+      // videos_view_sorted,
+      // videos_totalComments_sorted,
+      // video_ranges,
     });
   } catch (error) {
     console.log(error);
@@ -169,7 +185,7 @@ export const postUpload = async (req, res) => {
     body: { title, description, duration },
     file: { location },
   } = req;
-  console.log(req.file);
+  console.log(req.body);
   const newVideo = await Video.create({
     fileUrl: location,
     title,

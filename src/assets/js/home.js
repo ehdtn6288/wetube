@@ -1,19 +1,20 @@
-// import axios from "axios";
-// const home = document.getElementById("home");
-// const select = document.getElementById("range");
-// //- console.log(s.selectedIndex);
-
-// const getRange = async () => {
-//   const rangeId = select.options[select.selectedIndex].value;
-//   console.log(select.options[select.selectedIndex].value);
-//   const response = await axios.get(`/api/${rangeId}/homeRange`);
-//   console.log(response);
-// };
-
-// function init() {
-//   //   select.addEventListener("change", getRange);
-// }
-
-// if (home) {
-//   init();
-// }
+const videosArrangeBox = document.getElementById("jsVideosArrangeBox");
+const arrangeATag = document.querySelector("a");
+const init = () => {
+  //   console.log(videosArrangeBox.children[0].innerText);
+  const liArray = videosArrangeBox.children;
+  for (i = 0; i < liArray.length; i++) {
+    const currentHref = window.location.href;
+    if (currentHref === liArray[i].children[0].href) {
+      console.log(liArray[i].children[0].href);
+      const el = liArray[i];
+      el.classList.add("selected");
+      //   el.style.transform = "translateY(-10px)";
+    }
+  }
+  //   console.log(window.location.search.includes("views"));
+  //   console.log(kim);
+};
+if (videosArrangeBox) {
+  init();
+}

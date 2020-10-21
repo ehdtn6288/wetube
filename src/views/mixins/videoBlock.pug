@@ -20,6 +20,7 @@ mixin videoBlock(video={})
                     span.seperator &nbsp;•&nbsp;
                     a.vidoeBlock__views(href=routes.videoDetail(video.id))
                         span.views #{video.views} views
+                            
                 .videoBlock__meta
                     a(href=routes.videoDetail(video.id))
                         span.videoBlock__comments

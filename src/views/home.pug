@@ -6,14 +6,22 @@ block content
     .home-videos#home
 
         .videos__title
-            span Latest
-            .select
-
-                select(name="range", id = "range", onchange="location.href=this.value")
-                    option(value="" selected) 정렬   
-                    option(value=`/`) 날짜순
-                    option(value=`/range-views`) 조회수
-                    option(value=`/range-comments`) 댓글순
+            span #{title}
+            .videos__arrange
+                
+                ul.videos__arrange-box#jsVideosArrangeBox
+                    li
+                        a(href=`/`) Date
+                    li   
+                        a(href=`/?data=views`) Views
+                    li
+                        a(href=`/?data=comments`) Comments
+                        
+                //- select(name="range", id = "range", onchange="location.href=this.value")
+                //-     option(value="" selected) 정렬   
+                //-     option(value=`/`) 날짜순
+                //-     option(value=`/range-views`) 조회수
+                //-     option(value=`/range-comments`) 댓글순
              
         .videos__latestVideos        
               

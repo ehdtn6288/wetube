@@ -23,7 +23,6 @@ function handlePlayPause() {
   if (videoPlayer.paused) {
     videoPlayer.play();
     videoPlayBtn.innerHTML = `<i class="fas fa-pause"></i>`;
-
     videoControlBox.style.opacity = "0";
   } else {
     videoPlayer.pause();
@@ -66,7 +65,7 @@ function outFullscreen() {
   videoFullBtn.addEventListener("click", goFullscreen);
 }
 function goFullscreen() {
-  videoContainer.requestFullscreen();
+  // videoContainer.requestFullscreen();
   if (videoContainer.requestFullscreen) {
     videoContainer.requestFullscreen();
   } else if (videoContainer.mozRequestFullScreen) {
@@ -141,16 +140,7 @@ function formatVolume(value) {
 function handlePlay(e) {
   videoPlayer.currentTime = videoPlayRange.value;
   videoCurrentTime.innerHTML = formatData(videoPlayRange.value); // 바뀐 재생지점 표시해주기
-  const {
-    target: { value: val },
-  } = e;
-  console.log("dkjfskflskjflskfjsldkjfsdlkj");
-  videoPlayRange.style.background =
-    "linear-gradient(to right, red, dodgerblue " +
-    val +
-    "%, #d5d4d3 " +
-    val +
-    "%, #d5d4d3 100%";
+
   // console.log("range : " + videoPlayRange.value);
   // console.log("재생시간 : " + videoPlayer.currentTime);
 }
@@ -224,8 +214,8 @@ const showVolumeRange = () => {
   videoVolumeBox.style.backgroundColor = "rgba(255, 255, 255, 0.153)";
 };
 const hideVolumeRange = () => {
-  videoVolumeBtn.style.width = `initial`;
-  videoVolumeRangeWrapper.style.width = `0`;
+  videoVolumeBtn.style.width = `25px`;
+  videoVolumeRangeWrapper.style.width = `1px`;
   videoVolumeBox.style.backgroundColor = "transparent";
 };
 const handlePcMobilePlay = () => {
@@ -277,6 +267,8 @@ function init() {
   videoVolumeRange.addEventListener("input", handleVolume);
   videoPlayRange.addEventListener("input", handlePlay);
   window.addEventListener("keydown", playWithSpace);
+
+  document.addEventListener("webkitfullscreenchange", handleVideoJsFull);
   document.addEventListener("fullscreenchange", handleVideoJsFull);
   videoPlayer.addEventListener(clickEvent(), handlePcMobilePlay);
   // window.addEventListener("resize", handleScreenControls);
